@@ -7,7 +7,7 @@ import com.github.pagehelper.PageInfo;
 
 public class WhcditResponse<T> implements Serializable {
 
-	private static final long serialVersionUID = -8222852155469355278L;
+	private static final long serialVersionUID = -8819154106630930549L;
 
 	private String status;// 返回状态：成功、失败
 	
