@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC
+ "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+ "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <context id="simple" targetRuntime="MyBatis3">
+	<commentGenerator>
+		<property name="javaFileEncoding" value="UTF-8" />
+		<property name="suppressAllComments" value="true" />
+		<property name="suppressDate" value="true" />
+		<property name="addRemarkComments" value="true" />
+	</commentGenerator>
+		
+    <jdbcConnection connectionURL="jdbc:mysql://192.168.20.227:23306/mengya" driverClass="com.mysql.cj.jdbc.Driver" password="mengya" userId="mengya"/>
+    <javaModelGenerator targetPackage="com.whcdit.imengya.model" targetProject="whcdit-imengya">
+		<property name="rootClass" value="com.whcdit.imengya.model.BaseModel"/>
+		<property name="trimStrings" value="fales" />
+	</javaModelGenerator>
+    <sqlMapGenerator targetPackage="com.whcdit.imengya.mapper" targetProject="whcdit-imengya"/>
+    <javaClientGenerator targetPackage="com.whcdit.imengya.mapper" targetProject="whcdit-imengya" type="XMLMAPPER"/>
+
+   	<table schema="resource" tableName="system_user_info" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+		<property name="useActualColumnNames" value="false" />
+		<generatedKey column="system_user_id" sqlStatement="JDBC" />
+	</table>
+	
+	 
+  
+  
+  </context>
+</generatorConfiguration>

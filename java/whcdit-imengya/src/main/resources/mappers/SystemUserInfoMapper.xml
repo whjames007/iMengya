@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whcdit.imengya.mapper.SystemUserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.whcdit.imengya.model.SystemUserInfo">
+    <id column="system_user_id" jdbcType="INTEGER" property="systemUserId" />
+    <result column="system_user_type" jdbcType="VARCHAR" property="systemUserType" />
+    <result column="system_user_account" jdbcType="VARCHAR" property="systemUserAccount" />
+    <result column="system_user_nickname" jdbcType="VARCHAR" property="systemUserNickname" />
+    <result column="system_role_id" jdbcType="INTEGER" property="systemRoleId" />
+    <result column="system_user_password" jdbcType="VARCHAR" property="systemUserPassword" />
+    <result column="system_user_image" jdbcType="VARCHAR" property="systemUserImage" />
+    <result column="check_question_flag" jdbcType="TIMESTAMP" property="checkQuestionFlag" />
+    <result column="check_question_first" jdbcType="VARCHAR" property="checkQuestionFirst" />
+    <result column="check_question_second" jdbcType="VARCHAR" property="checkQuestionSecond" />
+    <result column="check_question_third" jdbcType="VARCHAR" property="checkQuestionThird" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="check_answer_first" jdbcType="VARCHAR" property="checkAnswerFirst" />
+    <result column="check_answer_second" jdbcType="VARCHAR" property="checkAnswerSecond" />
+    <result column="check_answer_third" jdbcType="VARCHAR" property="checkAnswerThird" />
+    <result column="first_create_by" jdbcType="INTEGER" property="firstCreateBy" />
+    <result column="first_create_date" jdbcType="TIMESTAMP" property="firstCreateDate" />
+    <result column="data_status_flag" jdbcType="VARCHAR" property="dataStatusFlag" />
+    <result column="data_region_id" jdbcType="INTEGER" property="dataRegionId" />
+    <result column="data_change_type" jdbcType="VARCHAR" property="dataChangeType" />
+    <result column="data_change_desc" jdbcType="VARCHAR" property="dataChangeDesc" />
+    <result column="last_update_by" jdbcType="INTEGER" property="lastUpdateBy" />
+    <result column="last_update_date" jdbcType="TIMESTAMP" property="lastUpdateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    system_user_id, system_user_type, system_user_account, system_user_nickname, system_role_id, 
+    system_user_password, system_user_image, check_question_flag, check_question_first, 
+    check_question_second, check_question_third, last_login_time, check_answer_first, 
+    check_answer_second, check_answer_third, first_create_by, first_create_date, data_status_flag, 
+    data_region_id, data_change_type, data_change_desc, last_update_by, last_update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from system_user_info
+    where system_user_id = #{systemUserId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from system_user_info
+    where system_user_id = #{systemUserId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="system_user_id" keyProperty="systemUserId" parameterType="com.whcdit.imengya.model.SystemUserInfo" useGeneratedKeys="true">
+    insert into system_user_info (system_user_type, system_user_account, 
+      system_user_nickname, system_role_id, system_user_password, 
+      system_user_image, check_question_flag, check_question_first, 
+      check_question_second, check_question_third, 
+      last_login_time, check_answer_first, check_answer_second, 
+      check_answer_third, first_create_by, first_create_date, 
+      data_status_flag, data_region_id, data_change_type, 
+      data_change_desc, last_update_by, last_update_date
+      )
+    values (#{systemUserType,jdbcType=VARCHAR}, #{systemUserAccount,jdbcType=VARCHAR}, 
+      #{systemUserNickname,jdbcType=VARCHAR}, #{systemRoleId,jdbcType=INTEGER}, #{systemUserPassword,jdbcType=VARCHAR}, 
+      #{systemUserImage,jdbcType=VARCHAR}, #{checkQuestionFlag,jdbcType=TIMESTAMP}, #{checkQuestionFirst,jdbcType=VARCHAR}, 
+      #{checkQuestionSecond,jdbcType=VARCHAR}, #{checkQuestionThird,jdbcType=VARCHAR}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{checkAnswerFirst,jdbcType=VARCHAR}, #{checkAnswerSecond,jdbcType=VARCHAR}, 
+      #{checkAnswerThird,jdbcType=VARCHAR}, #{firstCreateBy,jdbcType=INTEGER}, #{firstCreateDate,jdbcType=TIMESTAMP}, 
+      #{dataStatusFlag,jdbcType=VARCHAR}, #{dataRegionId,jdbcType=INTEGER}, #{dataChangeType,jdbcType=VARCHAR}, 
+      #{dataChangeDesc,jdbcType=VARCHAR}, #{lastUpdateBy,jdbcType=INTEGER}, #{lastUpdateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="system_user_id" keyProperty="systemUserId" parameterType="com.whcdit.imengya.model.SystemUserInfo" useGeneratedKeys="true">
+    insert into system_user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="systemUserType != null">
+        system_user_type,
+      </if>
+      <if test="systemUserAccount != null">
+        system_user_account,
+      </if>
+      <if test="systemUserNickname != null">
+        system_user_nickname,
+      </if>
+      <if test="systemRoleId != null">
+        system_role_id,
+      </if>
+      <if test="systemUserPassword != null">
+        system_user_password,
+      </if>
+      <if test="systemUserImage != null">
+        system_user_image,
+      </if>
+      <if test="checkQuestionFlag != null">
+        check_question_flag,
+      </if>
+      <if test="checkQuestionFirst != null">
+        check_question_first,
+      </if>
+      <if test="checkQuestionSecond != null">
+        check_question_second,
+      </if>
+      <if test="checkQuestionThird != null">
+        check_question_third,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="checkAnswerFirst != null">
+        check_answer_first,
+      </if>
+      <if test="checkAnswerSecond != null">
+        check_answer_second,
+      </if>
+      <if test="checkAnswerThird != null">
+        check_answer_third,
+      </if>
+      <if test="firstCreateBy != null">
+        first_create_by,
+      </if>
+      <if test="firstCreateDate != null">
+        first_create_date,
+      </if>
+      <if test="dataStatusFlag != null">
+        data_status_flag,
+      </if>
+      <if test="dataRegionId != null">
+        data_region_id,
+      </if>
+      <if test="dataChangeType != null">
+        data_change_type,
+      </if>
+      <if test="dataChangeDesc != null">
+        data_change_desc,
+      </if>
+      <if test="lastUpdateBy != null">
+        last_update_by,
+      </if>
+      <if test="lastUpdateDate != null">
+        last_update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="systemUserType != null">
+        #{systemUserType,jdbcType=VARCHAR},
+      </if>
+      <if test="systemUserAccount != null">
+        #{systemUserAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="systemUserNickname != null">
+        #{systemUserNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="systemRoleId != null">
+        #{systemRoleId,jdbcType=INTEGER},
+      </if>
+      <if test="systemUserPassword != null">
+        #{systemUserPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="systemUserImage != null">
+        #{systemUserImage,jdbcType=VARCHAR},
+      </if>
+      <if test="checkQuestionFlag != null">
+        #{checkQuestionFlag,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkQuestionFirst != null">
+        #{checkQuestionFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="checkQuestionSecond != null">
+        #{checkQuestionSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="checkQuestionThird != null">
+        #{checkQuestionThird,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkAnswerFirst != null">
+        #{checkAnswerFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="checkAnswerSecond != null">
+        #{checkAnswerSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="checkAnswerThird != null">
+        #{checkAnswerThird,jdbcType=VARCHAR},
+      </if>
+      <if test="firstCreateBy != null">
+        #{firstCreateBy,jdbcType=INTEGER},
+      </if>
+      <if test="firstCreateDate != null">
+        #{firstCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatusFlag != null">
+        #{dataStatusFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="dataRegionId != null">
+        #{dataRegionId,jdbcType=INTEGER},
+      </if>
+      <if test="dataChangeType != null">
+        #{dataChangeType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataChangeDesc != null">
+        #{dataChangeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateBy != null">
+        #{lastUpdateBy,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateDate != null">
+        #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whcdit.imengya.model.SystemUserInfo">
+    update system_user_info
+    <set>
+      <if test="systemUserType != null">
+        system_user_type = #{systemUserType,jdbcType=VARCHAR},
+      </if>
+      <if test="systemUserAccount != null">
+        system_user_account = #{systemUserAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="systemUserNickname != null">
+        system_user_nickname = #{systemUserNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="systemRoleId != null">
+        system_role_id = #{systemRoleId,jdbcType=INTEGER},
+      </if>
+      <if test="systemUserPassword != null">
+        system_user_password = #{systemUserPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="systemUserImage != null">
+        system_user_image = #{systemUserImage,jdbcType=VARCHAR},
+      </if>
+      <if test="checkQuestionFlag != null">
+        check_question_flag = #{checkQuestionFlag,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkQuestionFirst != null">
+        check_question_first = #{checkQuestionFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="checkQuestionSecond != null">
+        check_question_second = #{checkQuestionSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="checkQuestionThird != null">
+        check_question_third = #{checkQuestionThird,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkAnswerFirst != null">
+        check_answer_first = #{checkAnswerFirst,jdbcType=VARCHAR},
+      </if>
+      <if test="checkAnswerSecond != null">
+        check_answer_second = #{checkAnswerSecond,jdbcType=VARCHAR},
+      </if>
+      <if test="checkAnswerThird != null">
+        check_answer_third = #{checkAnswerThird,jdbcType=VARCHAR},
+      </if>
+      <if test="firstCreateBy != null">
+        first_create_by = #{firstCreateBy,jdbcType=INTEGER},
+      </if>
+      <if test="firstCreateDate != null">
+        first_create_date = #{firstCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatusFlag != null">
+        data_status_flag = #{dataStatusFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="dataRegionId != null">
+        data_region_id = #{dataRegionId,jdbcType=INTEGER},
+      </if>
+      <if test="dataChangeType != null">
+        data_change_type = #{dataChangeType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataChangeDesc != null">
+        data_change_desc = #{dataChangeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateBy != null">
+        last_update_by = #{lastUpdateBy,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateDate != null">
+        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where system_user_id = #{systemUserId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whcdit.imengya.model.SystemUserInfo">
+    update system_user_info
+    set system_user_type = #{systemUserType,jdbcType=VARCHAR},
+      system_user_account = #{systemUserAccount,jdbcType=VARCHAR},
+      system_user_nickname = #{systemUserNickname,jdbcType=VARCHAR},
+      system_role_id = #{systemRoleId,jdbcType=INTEGER},
+      system_user_password = #{systemUserPassword,jdbcType=VARCHAR},
+      system_user_image = #{systemUserImage,jdbcType=VARCHAR},
+      check_question_flag = #{checkQuestionFlag,jdbcType=TIMESTAMP},
+      check_question_first = #{checkQuestionFirst,jdbcType=VARCHAR},
+      check_question_second = #{checkQuestionSecond,jdbcType=VARCHAR},
+      check_question_third = #{checkQuestionThird,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      check_answer_first = #{checkAnswerFirst,jdbcType=VARCHAR},
+      check_answer_second = #{checkAnswerSecond,jdbcType=VARCHAR},
+      check_answer_third = #{checkAnswerThird,jdbcType=VARCHAR},
+      first_create_by = #{firstCreateBy,jdbcType=INTEGER},
+      first_create_date = #{firstCreateDate,jdbcType=TIMESTAMP},
+      data_status_flag = #{dataStatusFlag,jdbcType=VARCHAR},
+      data_region_id = #{dataRegionId,jdbcType=INTEGER},
+      data_change_type = #{dataChangeType,jdbcType=VARCHAR},
+      data_change_desc = #{dataChangeDesc,jdbcType=VARCHAR},
+      last_update_by = #{lastUpdateBy,jdbcType=INTEGER},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP}
+    where system_user_id = #{systemUserId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectWithCondition" parameterType="com.whcdit.imengya.model.SystemUserInfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from system_user_info
+<where>
+	<if test="dataStatus != null">data_status = #{dataStatus,jdbcType=VARCHAR}</if>
+	<if test="noid != null">AND system_user_id != #{noid,jdbcType=INTEGER}</if>
+	<if test="systemUserAccount != null">AND system_user_account = #{systemUserAccount,jdbcType=VARCHAR}</if>
+	<if test="systemDepartmentId != null">AND system_department_id = #{systemDepartmentId,jdbcType=INTEGER}</if>
+</where>
+  </select>
+  
+  <select id="selectWithMorethan" parameterType="com.whcdit.imengya.model.SystemUserInfo" resultType="com.whcdit.imengya.model.SystemUserInfo">
+SELECT
+	d.system_center_name AS systemCenterName,
+	c.system_department_name AS systemDepartmentName,
+	b.system_role_name AS systemRoleName,
+	a.system_user_id AS systemUserId,
+	a.system_user_account AS systemUserAccount,
+	a.system_user_type AS systemUserType,
+	a.system_user_password AS systemUserPassword,
+	a.system_user_nickname AS systemUserNickname,
+	a.system_role_id AS systemRoleId,
+	a.last_login_time AS lastLoginTime,
+	a.system_user_accname AS systemUserAccname,
+	a.system_department_id AS systemDepartmentId,
+	a.first_create_by AS firstCreateBy,
+	a.first_create_date AS firstCreateDate,
+	a.data_status AS dataStatus,
+	a.data_separate_id AS dataSeparateId,
+	a.description AS description,
+	a.last_update_by AS lastUpdateBy,
+	a.last_update_date AS lastUpdateDate 
+FROM
+	system_user_info a
+	JOIN system_role_info b ON a.system_role_id = b.system_role_id
+	JOIN system_department_info c ON a.system_department_id = c.system_department_id
+	JOIN system_center_info d ON c.system_center_id = d.system_center_id
+<where>
+  a.system_user_id <![CDATA[ > ]]> 100
+  <if test="dataStatus != null">AND a.data_status = #{dataStatus,jdbcType=VARCHAR}</if>
+  <if test="systemUserAccount != null">AND a.system_user_account like CONCAT('%', #{systemUserAccount,jdbcType=VARCHAR}, '%')</if>
+  <if test="systemUserNickname != null">AND a.system_user_nickname like CONCAT('%', #{systemUserNickname,jdbcType=VARCHAR}, '%')</if>
+  <if test="systemRoleId != null">AND a.system_role_id = #{systemRoleId,jdbcType=INTEGER}</if>
+  <if test="systemDepartmentId != null">AND a.system_department_id = #{systemDepartmentId,jdbcType=INTEGER}</if>
+</where>
+ORDER BY a.first_create_date DESC
+  </select>
+  
+  
+</mapper>
