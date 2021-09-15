@@ -1,7 +1,7 @@
-const urlRouter = '/iprmsapi'
+const urlRouter = '/imyapi'
 const cont = {
-  name: '正维电子项目资源管理系统',
-  web: 'WEB',
+  size: 'mini',
+  formLabelWidth: '100',
   search: '查询',
   reset: '重置',
   add: '增加',
@@ -10,9 +10,6 @@ const cont = {
   confirm: '确认',
   cancel: '取消',
   titleSecond: '二次密码验证',
-  manual: 'MANUAL',
-  info: 'INFO',
-  waiting: 'WAITING',
   success: 'SUCCESS',
   failure: 'FAILURE',
   sender: 'SENDER',

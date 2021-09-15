@@ -15,6 +15,7 @@ public class WhcditConstants {
 	public static final String NO = "NO";
 	public static final String OK = "OK";
 
+	public static final String ROOT = "ROOT";
 	public static final String BRANCH = "BRANCH";
 	public static final String LEAF = "LEAF";
 

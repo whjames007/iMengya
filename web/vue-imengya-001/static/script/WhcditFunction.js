@@ -4,9 +4,25 @@ let func = {
   respSuccess (code) {
     if (code === gresp + '10000') { return true } else { return false }
   },
-  respParse (my, code) {
-    let res = ''
+  respParse (my, resp, callback) {
+    let msg = null
+    let code = resp.data.code
     switch (code) {
+      case gresp + '10000': msg = 'OK'; break
+      case gresp + '20001': msg = '系统故障，请与管理员联系！'; break
+      case gresp + '30001': msg = '账号或密码不正确，请重新输入！'; break
+      case gresp + '30002': msg = '您输入的用户账号已存在，请重新输入！'; break
+      case gresp + '30003': msg = '资源在当前月份的空闲工时不足！'; break
+      case gresp + '30004': msg = '资源已在本计划中分配过了！'; break
+      case gresp + '30005': msg = '您好，此部门尚有关联用户，请先解除其关联关系！'; break
+      default: msg = '未知的异常：' + code; break
+    }
+    if (msg === 'OK') { callback(resp.data) } else { my.$message.error(msg) }
+  },
+  respParse2 (my, code) {
+    let res = null
+    switch (code) {
+      case gresp + '10000': res = '10000'; break
       case gresp + '20001': res = '系统故障，请与管理员联系！'; break
       case gresp + '30001': res = '账号或密码不正确，请重新输入！'; break
       case gresp + '30002': res = '您输入的用户账号已存在，请重新输入！'; break
@@ -15,7 +31,11 @@ let func = {
       case gresp + '30005': res = '您好，此部门尚有关联用户，请先解除其关联关系！'; break
       default: res = '未知的异常：' + code; break
     }
-    my.$message.error(res)
+    if (res === '10000') {
+      return true
+    } else {
+      my.$message.error(res)
+    }
   },
   getUser () {
     let json = sessionStorage.getItem(keyUser)

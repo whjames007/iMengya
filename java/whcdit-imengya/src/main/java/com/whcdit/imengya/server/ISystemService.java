@@ -3,6 +3,8 @@ package com.whcdit.imengya.server;
 import java.util.List;
 
 import com.github.pagehelper.PageInfo;
+import com.whcdit.imengya.model.SystemMenuInfo;
+import com.whcdit.imengya.model.SystemRoleInfo;
 import com.whcdit.imengya.model.SystemUserInfo; 
 
 public interface ISystemService extends IBaseService {
@@ -20,19 +22,19 @@ public interface ISystemService extends IBaseService {
 	public List<SystemUserInfo> userList(SystemUserInfo param);
 
 	public void userLogin(SystemUserInfo user);
-//
-//	// 角色系列
-//	public List<SystemRoleInfo> roleList(SystemRoleInfo param);
-//
+
+	// 角色系列
+	public List<SystemRoleInfo> roleList(SystemRoleInfo param);
+
 //	public PageInfo<SystemRoleInfo> rolePage(SystemRoleInfo param);
 //
 //	public int roleEdit(SystemRoleInfo param);
 //
 //	// 菜单系列
 //	public SystemMenuInfo menuTree(SystemMenuInfo param);
-//
-//	public List<SystemMenuInfo> menuList(SystemMenuInfo param);
-//
+
+	public List<SystemMenuInfo> menuList(SystemMenuInfo param);
+
 //	public int menuEdit(SystemMenuInfo param);
 //
 //	// 参数配置系列

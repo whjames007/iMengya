@@ -16,6 +16,7 @@ Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 
 Vue.prototype.$axios = axios
+Vue.prototype.whc = WhcditUtils
 
 /* eslint-disable no-new */
 new Vue({

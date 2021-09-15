@@ -2,154 +2,176 @@ package com.whcdit.imengya.model;
 
 import java.util.Date;
 
+
 public class SystemUserInfo extends BaseModel {
-    private Integer systemUserId;
 
-    private String systemUserType;
+	private Integer systemUserId;
 
-    private String systemUserAccount;
+	private String systemUserType;
 
-    private String systemUserNickname;
+	private String systemUserAccount;
 
-    private Integer systemRoleId;
+	private String systemUserNickname;
 
-    private String systemUserPassword;
+	private Integer systemRoleId;
 
-    private String systemUserImage;
+	private String systemUserPassword;
 
-    private Date checkQuestionFlag;
+	private String systemUserImage;
 
-    private String checkQuestionFirst;
+	private String checkQuestionFlag;
 
-    private String checkQuestionSecond;
+	private String checkQuestionFirst;
 
-    private String checkQuestionThird;
+	private String checkQuestionSecond;
 
-    private Date lastLoginTime;
+	private String checkQuestionThird;
 
-    private String checkAnswerFirst;
+	private Date lastLoginTime;
 
-    private String checkAnswerSecond;
+	private String checkAnswerFirst;
 
-    private String checkAnswerThird;
+	private String checkAnswerSecond;
 
-    public Integer getSystemUserId() {
-        return systemUserId;
-    }
+	private String checkAnswerThird;
 
-    public void setSystemUserId(Integer systemUserId) {
-        this.systemUserId = systemUserId;
-    }
+	private String systemRoleName; // 前端分页查询
 
-    public String getSystemUserType() {
-        return systemUserType;
-    }
+	private SystemMenuInfo menu; // 携带菜单权限
+ 
+	public String getSystemRoleName() {
+		return systemRoleName;
+	}
 
-    public void setSystemUserType(String systemUserType) {
-        this.systemUserType = systemUserType;
-    }
+	public void setSystemRoleName(String systemRoleName) {
+		this.systemRoleName = systemRoleName;
+	}
 
-    public String getSystemUserAccount() {
-        return systemUserAccount;
-    }
+	public SystemMenuInfo getMenu() {
+		return menu;
+	}
 
-    public void setSystemUserAccount(String systemUserAccount) {
-        this.systemUserAccount = systemUserAccount;
-    }
+	public void setMenu(SystemMenuInfo menu) {
+		this.menu = menu;
+	}
 
-    public String getSystemUserNickname() {
-        return systemUserNickname;
-    }
+	public Integer getSystemUserId() {
+		return systemUserId;
+	}
 
-    public void setSystemUserNickname(String systemUserNickname) {
-        this.systemUserNickname = systemUserNickname;
-    }
+	public void setSystemUserId(Integer systemUserId) {
+		this.systemUserId = systemUserId;
+	}
 
-    public Integer getSystemRoleId() {
-        return systemRoleId;
-    }
+	public String getSystemUserType() {
+		return systemUserType;
+	}
 
-    public void setSystemRoleId(Integer systemRoleId) {
-        this.systemRoleId = systemRoleId;
-    }
+	public void setSystemUserType(String systemUserType) {
+		this.systemUserType = systemUserType;
+	}
 
-    public String getSystemUserPassword() {
-        return systemUserPassword;
-    }
+	public String getSystemUserAccount() {
+		return systemUserAccount;
+	}
 
-    public void setSystemUserPassword(String systemUserPassword) {
-        this.systemUserPassword = systemUserPassword;
-    }
+	public void setSystemUserAccount(String systemUserAccount) {
+		this.systemUserAccount = systemUserAccount;
+	}
 
-    public String getSystemUserImage() {
-        return systemUserImage;
-    }
+	public String getSystemUserNickname() {
+		return systemUserNickname;
+	}
 
-    public void setSystemUserImage(String systemUserImage) {
-        this.systemUserImage = systemUserImage;
-    }
+	public void setSystemUserNickname(String systemUserNickname) {
+		this.systemUserNickname = systemUserNickname;
+	}
 
-    public Date getCheckQuestionFlag() {
-        return checkQuestionFlag;
-    }
+	public Integer getSystemRoleId() {
+		return systemRoleId;
+	}
 
-    public void setCheckQuestionFlag(Date checkQuestionFlag) {
-        this.checkQuestionFlag = checkQuestionFlag;
-    }
+	public void setSystemRoleId(Integer systemRoleId) {
+		this.systemRoleId = systemRoleId;
+	}
 
-    public String getCheckQuestionFirst() {
-        return checkQuestionFirst;
-    }
+	public String getSystemUserPassword() {
+		return systemUserPassword;
+	}
 
-    public void setCheckQuestionFirst(String checkQuestionFirst) {
-        this.checkQuestionFirst = checkQuestionFirst;
-    }
+	public void setSystemUserPassword(String systemUserPassword) {
+		this.systemUserPassword = systemUserPassword;
+	}
 
-    public String getCheckQuestionSecond() {
-        return checkQuestionSecond;
-    }
+	public String getSystemUserImage() {
+		return systemUserImage;
+	}
 
-    public void setCheckQuestionSecond(String checkQuestionSecond) {
-        this.checkQuestionSecond = checkQuestionSecond;
-    }
+	public void setSystemUserImage(String systemUserImage) {
+		this.systemUserImage = systemUserImage;
+	}
 
-    public String getCheckQuestionThird() {
-        return checkQuestionThird;
-    }
+	public String getCheckQuestionFlag() {
+		return checkQuestionFlag;
+	}
 
-    public void setCheckQuestionThird(String checkQuestionThird) {
-        this.checkQuestionThird = checkQuestionThird;
-    }
+	public void setCheckQuestionFlag(String checkQuestionFlag) {
+		this.checkQuestionFlag = checkQuestionFlag;
+	}
 
-    public Date getLastLoginTime() {
-        return lastLoginTime;
-    }
+	public String getCheckQuestionFirst() {
+		return checkQuestionFirst;
+	}
 
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
-    }
+	public void setCheckQuestionFirst(String checkQuestionFirst) {
+		this.checkQuestionFirst = checkQuestionFirst;
+	}
 
-    public String getCheckAnswerFirst() {
-        return checkAnswerFirst;
-    }
+	public String getCheckQuestionSecond() {
+		return checkQuestionSecond;
+	}
 
-    public void setCheckAnswerFirst(String checkAnswerFirst) {
-        this.checkAnswerFirst = checkAnswerFirst;
-    }
+	public void setCheckQuestionSecond(String checkQuestionSecond) {
+		this.checkQuestionSecond = checkQuestionSecond;
+	}
 
-    public String getCheckAnswerSecond() {
-        return checkAnswerSecond;
-    }
+	public String getCheckQuestionThird() {
+		return checkQuestionThird;
+	}
 
-    public void setCheckAnswerSecond(String checkAnswerSecond) {
-        this.checkAnswerSecond = checkAnswerSecond;
-    }
+	public void setCheckQuestionThird(String checkQuestionThird) {
+		this.checkQuestionThird = checkQuestionThird;
+	}
 
-    public String getCheckAnswerThird() {
-        return checkAnswerThird;
-    }
+	public Date getLastLoginTime() {
+		return lastLoginTime;
+	}
 
-    public void setCheckAnswerThird(String checkAnswerThird) {
-        this.checkAnswerThird = checkAnswerThird;
-    }
+	public void setLastLoginTime(Date lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+
+	public String getCheckAnswerFirst() {
+		return checkAnswerFirst;
+	}
+
+	public void setCheckAnswerFirst(String checkAnswerFirst) {
+		this.checkAnswerFirst = checkAnswerFirst;
+	}
+
+	public String getCheckAnswerSecond() {
+		return checkAnswerSecond;
+	}
+
+	public void setCheckAnswerSecond(String checkAnswerSecond) {
+		this.checkAnswerSecond = checkAnswerSecond;
+	}
+
+	public String getCheckAnswerThird() {
+		return checkAnswerThird;
+	}
+
+	public void setCheckAnswerThird(String checkAnswerThird) {
+		this.checkAnswerThird = checkAnswerThird;
+	}
 }

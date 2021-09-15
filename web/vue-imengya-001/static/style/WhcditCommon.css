@@ -1,0 +1,80 @@
+/*【调整饿了么表格高亮行底色】【宋鹏-18091】【武汉】【2020-08-24】*/
+.el-table__body tr.current-row>td {background: #FFC0CB !important;}
+/*【调整饿了么树高亮行底色】【宋鹏-18091】【武汉】【2020-08-24】*/
+.el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {background-color: #FFC0CB !important;}
+/*【调整饿了么表格过长提示的样式】【宋鹏-18091】【武汉】【2020-08-24】*/
+.el-tooltip__popper {max-width: 400px;}
+/*【调整饿了么导航白边的样式】【宋鹏-18091】【武汉】【2020-09-02】*/
+.el-menu {border-right: 0;}
+
+#app {font-size: 14px; font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;}
+
+.whc-col-right {padding: 0px 10px 0px 0px; display: flex; justify-content: flex-end;}
+
+.whc-col-logo {height: 60px; padding: 0px 0px 0px 10px; background: #FFC0CB; display: flex; align-items: center;}
+
+.whc-col-title {
+	height: 60px; background: #FFC0CB; display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 36px; font-family: FangSong; font-weight: 900;
+}
+.whc-col-version {
+	height: 60px; padding: 0px 10px 0px 0px; background: #FFC0CB; display: flex; align-items: center; justify-content: flex-end; color: #FFFFFF; font-size: 14px; font-family: FangSong; font-weight: 900;
+}
+
+.whc-col-search {
+	padding: 0px 10px 0px 0px; display: flex; justify-content: flex-end;
+}
+
+.whc-col-echart {
+	padding: 80px 80px 80px 80px; display: flex; justify-content: flex-end;
+}
+
+.whc-dialog-button {
+	display: flex; align-items: center; justify-content: flex-end;
+}
+
+.whc-color-blue {
+	color: #409EFF;
+}
+
+.whc-color-pink {
+	color: #FFC0CB;
+}
+
+.whc-div-pagination { margin: 10px 0px 0px 0px; display: flex; align-items: center; justify-content: center; }
+
+.whc-div-balance {
+	width: 90%; text-align: center;
+}
+
+.whc-over-calendar {
+	height: 100px; padding: 10px 0px 0px 0px;
+}
+
+.whc-red-flower {
+	height: 40px; margin: 0px 10px 0px 0px; color: #409EFF;
+}
+.whc-div-flower {
+	height: 40px; display: flex; align-items: center; justify-content: flex-home; margin: 10px 10px 10px 10px; color: #ECB1AC;
+}
+.whc-div-shanhe {
+	height: 40px; display: flex; align-items: center; justify-content: center; margin: 10px 10px 10px 10px; color: #409EFF; font-size: 18px;
+}
+.whc-div-jiayou {
+	height: 40px; display: flex; align-items: center; justify-content: center; margin: 10px 10px 10px 10px; color: #ECB1AC; font-size: 18px;
+}
+.whc-icon-gou {
+	color: #67C23A; font-size: 28px; font-weight: 900;
+}
+.el-button--pink {
+    color: #FFFFFF;
+    background-color: #FFC0CB;
+    border-color: #FFC0CB;
+}
+
+.el-button--pink:hover {
+  background: #FFFFFF;
+  border-color: #FFC0CB;
+  color: #FFC0CB;
+}
+
+

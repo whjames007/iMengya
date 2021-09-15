@@ -7,7 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import com.whcdit.imengya.model.SystemUserInfo;
 
 @Mapper
-public interface SystemUserInfoMapper {
+public interface SystemUserInfoMapper { 
+
 	int deleteByPrimaryKey(Integer systemUserId);
 
 	int insert(SystemUserInfo record);

@@ -9,7 +9,7 @@
     <result column="system_role_id" jdbcType="INTEGER" property="systemRoleId" />
     <result column="system_user_password" jdbcType="VARCHAR" property="systemUserPassword" />
     <result column="system_user_image" jdbcType="VARCHAR" property="systemUserImage" />
-    <result column="check_question_flag" jdbcType="TIMESTAMP" property="checkQuestionFlag" />
+    <result column="check_question_flag" jdbcType="VARCHAR" property="checkQuestionFlag" />
     <result column="check_question_first" jdbcType="VARCHAR" property="checkQuestionFirst" />
     <result column="check_question_second" jdbcType="VARCHAR" property="checkQuestionSecond" />
     <result column="check_question_third" jdbcType="VARCHAR" property="checkQuestionThird" />
@@ -55,7 +55,7 @@
       )
     values (#{systemUserType,jdbcType=VARCHAR}, #{systemUserAccount,jdbcType=VARCHAR}, 
       #{systemUserNickname,jdbcType=VARCHAR}, #{systemRoleId,jdbcType=INTEGER}, #{systemUserPassword,jdbcType=VARCHAR}, 
-      #{systemUserImage,jdbcType=VARCHAR}, #{checkQuestionFlag,jdbcType=TIMESTAMP}, #{checkQuestionFirst,jdbcType=VARCHAR}, 
+      #{systemUserImage,jdbcType=VARCHAR}, #{checkQuestionFlag,jdbcType=VARCHAR}, #{checkQuestionFirst,jdbcType=VARCHAR}, 
       #{checkQuestionSecond,jdbcType=VARCHAR}, #{checkQuestionThird,jdbcType=VARCHAR}, 
       #{lastLoginTime,jdbcType=TIMESTAMP}, #{checkAnswerFirst,jdbcType=VARCHAR}, #{checkAnswerSecond,jdbcType=VARCHAR}, 
       #{checkAnswerThird,jdbcType=VARCHAR}, #{firstCreateBy,jdbcType=INTEGER}, #{firstCreateDate,jdbcType=TIMESTAMP}, 
@@ -153,7 +153,7 @@
         #{systemUserImage,jdbcType=VARCHAR},
       </if>
       <if test="checkQuestionFlag != null">
-        #{checkQuestionFlag,jdbcType=TIMESTAMP},
+        #{checkQuestionFlag,jdbcType=VARCHAR},
       </if>
       <if test="checkQuestionFirst != null">
         #{checkQuestionFirst,jdbcType=VARCHAR},
@@ -224,7 +224,7 @@
         system_user_image = #{systemUserImage,jdbcType=VARCHAR},
       </if>
       <if test="checkQuestionFlag != null">
-        check_question_flag = #{checkQuestionFlag,jdbcType=TIMESTAMP},
+        check_question_flag = #{checkQuestionFlag,jdbcType=VARCHAR},
       </if>
       <if test="checkQuestionFirst != null">
         check_question_first = #{checkQuestionFirst,jdbcType=VARCHAR},
@@ -282,7 +282,7 @@
       system_role_id = #{systemRoleId,jdbcType=INTEGER},
       system_user_password = #{systemUserPassword,jdbcType=VARCHAR},
       system_user_image = #{systemUserImage,jdbcType=VARCHAR},
-      check_question_flag = #{checkQuestionFlag,jdbcType=TIMESTAMP},
+      check_question_flag = #{checkQuestionFlag,jdbcType=VARCHAR},
       check_question_first = #{checkQuestionFirst,jdbcType=VARCHAR},
       check_question_second = #{checkQuestionSecond,jdbcType=VARCHAR},
       check_question_third = #{checkQuestionThird,jdbcType=VARCHAR},
@@ -306,49 +306,52 @@
     <include refid="Base_Column_List" />
     from system_user_info
 <where>
-	<if test="dataStatus != null">data_status = #{dataStatus,jdbcType=VARCHAR}</if>
+ 	<if test="dataStatusFlag != null"> data_status_flag = #{dataStatusFlag,jdbcType=VARCHAR}</if>
 	<if test="noid != null">AND system_user_id != #{noid,jdbcType=INTEGER}</if>
 	<if test="systemUserAccount != null">AND system_user_account = #{systemUserAccount,jdbcType=VARCHAR}</if>
-	<if test="systemDepartmentId != null">AND system_department_id = #{systemDepartmentId,jdbcType=INTEGER}</if>
 </where>
   </select>
   
   <select id="selectWithMorethan" parameterType="com.whcdit.imengya.model.SystemUserInfo" resultType="com.whcdit.imengya.model.SystemUserInfo">
 SELECT
-	d.system_center_name AS systemCenterName,
-	c.system_department_name AS systemDepartmentName,
 	b.system_role_name AS systemRoleName,
 	a.system_user_id AS systemUserId,
-	a.system_user_account AS systemUserAccount,
 	a.system_user_type AS systemUserType,
-	a.system_user_password AS systemUserPassword,
+	a.system_user_account AS systemUserAccount,
 	a.system_user_nickname AS systemUserNickname,
 	a.system_role_id AS systemRoleId,
+	a.system_user_password AS systemUserPassword,
+	a.system_user_image AS systemUserImage,
+	a.check_question_flag AS checkQuestionFlag,
+	a.check_question_first AS checkQuestionFirst,
+	a.check_question_second AS checkQuestionSecond,
+	a.check_question_third AS checkQuestionThird,
 	a.last_login_time AS lastLoginTime,
-	a.system_user_accname AS systemUserAccname,
-	a.system_department_id AS systemDepartmentId,
+	a.check_answer_first AS checkAnswerFirst,
+	a.check_answer_second AS checkAnswerSecond,
+	a.check_answer_third AS checkAnswerThird,
 	a.first_create_by AS firstCreateBy,
 	a.first_create_date AS firstCreateDate,
-	a.data_status AS dataStatus,
-	a.data_separate_id AS dataSeparateId,
-	a.description AS description,
+	a.data_status_flag AS dataStatusFlag,
+	a.data_region_id AS dataRegionId,
+	a.data_change_type AS dataChangeType,
+	a.data_change_desc AS dataChangeDesc,
 	a.last_update_by AS lastUpdateBy,
 	a.last_update_date AS lastUpdateDate 
 FROM
-	system_user_info a
+	system_user_info a	
 	JOIN system_role_info b ON a.system_role_id = b.system_role_id
-	JOIN system_department_info c ON a.system_department_id = c.system_department_id
-	JOIN system_center_info d ON c.system_center_id = d.system_center_id
 <where>
   a.system_user_id <![CDATA[ > ]]> 100
-  <if test="dataStatus != null">AND a.data_status = #{dataStatus,jdbcType=VARCHAR}</if>
+  <if test="systemUserId != null">AND a.system_user_id = #{systemUserId,jdbcType=INTEGER}</if>
+  <if test="dataStatusFlag != null">AND a.data_status_flag = #{dataStatusFlag,jdbcType=VARCHAR}</if>
   <if test="systemUserAccount != null">AND a.system_user_account like CONCAT('%', #{systemUserAccount,jdbcType=VARCHAR}, '%')</if>
   <if test="systemUserNickname != null">AND a.system_user_nickname like CONCAT('%', #{systemUserNickname,jdbcType=VARCHAR}, '%')</if>
   <if test="systemRoleId != null">AND a.system_role_id = #{systemRoleId,jdbcType=INTEGER}</if>
-  <if test="systemDepartmentId != null">AND a.system_department_id = #{systemDepartmentId,jdbcType=INTEGER}</if>
 </where>
 ORDER BY a.first_create_date DESC
   </select>
-  
-  
+
+
+
 </mapper>
