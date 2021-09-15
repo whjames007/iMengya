@@ -6,7 +6,7 @@
 .el-tooltip__popper {max-width: 400px;}
 /*【调整饿了么导航白边的样式】【宋鹏-18091】【武汉】【2020-09-02】*/
 .el-menu {border-right: 0;}
-/*【调整饿了么选项卡的样式，去掉卡头的margin】【宋鹏-18091】【武汉】【2021-09-15】*/
+/*【调整饿了么选项卡的样式，去掉选项卡的下方margin】【宋鹏-18091】【武汉】【2021-09-15】*/
 .el-tabs__header {padding: 0; position: relative; margin: 0px 0px 0px 0px;}
 
 #app {font-size: 14px; font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;}

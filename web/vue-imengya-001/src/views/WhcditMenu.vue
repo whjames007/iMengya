@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     tableMethodPage () {
-      this.$axios.post(this.whc.cont.url.menuList, this.param).then((res) => {
+      this.$axios.post(this.whc.cont.menuList, this.param).then((res) => {
         if (this.whc.func.respSuccess(res.data.code)) { this.pages = res.data.list } else { this.whc.func.respParse(this, res.data.code) }
       })
     },
