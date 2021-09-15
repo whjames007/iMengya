@@ -63,10 +63,9 @@ export default {
   mounted () { this.whc.func.paramInit(this.param); this.mountedMethodInit(); this.tableMethodPage() },
   methods: {
     mountedMethodInit () {
-      this.$axios.post(this.whc.cont.url.roleList, {}).then((res) => { if (this.whc.func.respSuccess(res.data.code)) { this.roles = res.data.list } else { this.whc.func.respParse(this, res.data.code) } })
-      this.$axios.post(this.whc.cont.url.deptList, {}).then((res) => { if (this.whc.func.respSuccess(res.data.code)) { this.depts = res.data.list } else { this.whc.func.respParse(this, res.data.code) } })
+      this.$axios.post(this.whc.cont.roleList, {}).then((res) => { if (this.whc.func.respSuccess(res.data.code)) { this.roles = res.data.list } else { this.whc.func.respParse(this, res.data.code) } })
     },
-    tableMethodPage () { this.whc.func.postMethodPage(this, this.whc.cont.url.userPage, this.param) },
+    tableMethodPage () { this.whc.func.postMethodPage(this, this.whc.cont.userPage, this.param) },
     tableMethodSearch () { if (this.param.systemUserAccount || this.param.systemUserNickname || this.param.systemRoleId) { this.param.pageNum = 1 }; this.tableMethodPage() },
     tableMethodReset () { this.param.systemUserAccount = null; this.param.systemUserNickname = null; this.param.systemRoleId = null; this.tableMethodPage() },
     dialogMethodOpen (val) {

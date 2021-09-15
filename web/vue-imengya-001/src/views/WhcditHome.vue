@@ -16,14 +16,17 @@
             </el-menu>
           </el-popover>
         </el-col>
-        <el-col :span="12">
-          qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+        <el-col :span="12" class="local-home-head-col2">
+          <el-tabs class="local-home-head-tabs" v-model="tabsValue" type="card">
+            <el-tab-pane :key="item.systemMenuUrl" v-for="(item) in tabsList" :label="item.systemMenuName" :name="item.systemMenuName"
+            :closable="item.systemBoolClose"></el-tab-pane>
+          </el-tabs>
         </el-col>
         <el-col :span="6" class="local-home-head-col3">
           <div class="local-home-user"><i class="el-icon-setting"></i></div>
-          <div class="local-home-user">{{user.systemUserNickname}}</div>
-          <div class="local-home-user">[{{user.systemRoleName}}]</div>
-          <div class="local-home-user" @click="loginMethodOut"><i class="el-icon-top-right"></i></div>
+          <div class="local-home-user">{{user.systemUserNickname}}[{{user.systemRoleName}}]</div>
+          <div class="local-home-user"></div>
+          <div class="local-home-user" @click="loginMethodOut"><i class="el-icon-right"></i></div>
         </el-col>
       </el-row>
     </div>
@@ -47,15 +50,15 @@ export default {
       leafs: [], // 叶子集合
       activeRouter: 'summary',
       activeMenu: {},
+      tabsValue: 'summary',
+      tabsList: [],
       msg: 'Welcome to Your Vue.js App'
     }
   },
-  mounted () {
-    this.user = this.whc.func.getUser()
-    this.mountedMethodInit()
-  },
+  mounted () { this.mountedMethodInit() },
   methods: {
     mountedMethodInit () {
+      this.user = this.whc.func.getUser()
       this.menu = this.user.menu
       let arr = []
       this.menu.childs.forEach(branch => {
@@ -75,7 +78,7 @@ export default {
     menuMethodFind (val) {
       for (const key in this.leafs) {
         const ele = this.leafs[key]
-        if (val === ele.systemMenuUrl) { this.activeMenu = ele; return }
+        if (val === ele.systemMenuUrl) { this.tabsList.push(ele); this.activeMenu = ele; return }
       }
     },
     loginMethodOut () {
@@ -98,6 +101,8 @@ export default {
 .local-home-main {height: 86vh; background: #F2F6FC; overflow: auto;}
 .local-home-foot {height: 4vh; background: #409EFF; color: #FFFFFF; display: flex; align-items: center; justify-content: center;}
 .local-home-head-col1 {height: 6vh; display: flex; align-items: center; justify-content: left;}
+.local-home-head-col2 {height: 6vh; display: flex; align-items: center; justify-content: left;}
+.local-home-head-tabs {background: #FFFFFF; width: 50vw;}
 .local-home-head-col3 {height: 6vh; display: flex; align-items: center; justify-content: flex-end; padding: 0px 10px 0px 0px; color: #FFFFFF;}
 .local-home-logo {height: 4vh; margin: 0px 0px 0px 10px;}
 .local-home-user {padding: 0px 10px 0px 0px;}

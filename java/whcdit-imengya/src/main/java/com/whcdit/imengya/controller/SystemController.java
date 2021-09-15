@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.PageInfo;
 import com.whcdit.imengya.model.SystemUserInfo;
 import com.whcdit.imengya.server.ISystemService;
 import com.whcdit.imengya.utils.WhcditConstants;
 import com.whcdit.imengya.utils.WhcditResponse;
 import com.whcdit.imengya.utils.WhcditTools;
-
 
 @RestController
 @RequestMapping("/system")
@@ -22,10 +22,10 @@ public class SystemController {
 
 	@Autowired
 	private ISystemService systemService;
-	
+
 	private static final String puser = "/user/";
 
-	@PostMapping(puser+ "login")
+	@PostMapping(puser + "login")
 	public Object userLogin(@RequestBody SystemUserInfo param) {
 		WhcditResponse<SystemUserInfo> res = new WhcditResponse<>();
 		String account = param.getSystemUserAccount();
@@ -50,7 +50,7 @@ public class SystemController {
 		return res;
 	}
 
-	@PostMapping(puser+ "add")
+	@PostMapping(puser + "add")
 	public Object userAdd(@RequestBody SystemUserInfo param) {
 		WhcditResponse<SystemUserInfo> res = new WhcditResponse<>();
 		try {
@@ -61,6 +61,20 @@ public class SystemController {
 				systemService.userAdd(param);
 				res.buildSuccess(param, null, null);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.buildFailure(WhcditConstants.WHCDIT_RESPONSE_20001, e.getMessage());
+		}
+		return res;
+	}
+
+//	@ApiOperation("用户分页接口")
+	@PostMapping(puser + "page")
+	public Object userPage(@RequestBody SystemUserInfo param) {
+		WhcditResponse<SystemUserInfo> res = new WhcditResponse<>();
+		try {
+			PageInfo<SystemUserInfo> page = systemService.userPage(param);
+			res.buildSuccess(null, null, page);
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.buildFailure(WhcditConstants.WHCDIT_RESPONSE_20001, e.getMessage());
