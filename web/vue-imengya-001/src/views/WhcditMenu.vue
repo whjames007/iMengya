@@ -7,12 +7,14 @@
         <el-table-column prop="systemMenuName" label="菜单名称" show-overflow-tooltip/>
         <el-table-column prop="systemMenuType" label="菜单类型" show-overflow-tooltip/>
         <el-table-column prop="systemMenuIcon" label="菜单图标" show-overflow-tooltip/>
+        <el-table-column prop="systemMenuIcon" label="图标展示" show-overflow-tooltip><template slot-scope="scope"><i :class="scope.row.systemMenuIcon"></i></template></el-table-column>
         <el-table-column prop="systemMenuUrl" label="菜单路由" show-overflow-tooltip/>
         <el-table-column prop="systemParentId" label="上级菜单ID" show-overflow-tooltip/>
         <el-table-column prop="systemMenuClose" label="菜单可关闭" show-overflow-tooltip/>
         <el-table-column prop="systemMenuDesc" label="菜单描述" show-overflow-tooltip/>
         <el-table-column label="最后更新时间" show-overflow-tooltip><template slot-scope="scope">{{whc.dfmt.dts(scope.row.lastUpdateDate)}}</template></el-table-column>
-        <el-table-column label="操作" width="100"><template slot-scope="scope"><el-link type="primary" @click="dialogMethodOpen(scope.row)">编辑</el-link></template></el-table-column>
+        <el-table-column prop="dataChangeType" label="数据变化类型" show-overflow-tooltip/>
+        <el-table-column label="操作" width="80"><template slot-scope="scope"><el-link type="primary" @click="dialogMethodOpen(scope.row)">编辑</el-link></template></el-table-column>
     </el-table>
     <!-- 操作对话框 -->
     <el-dialog :title="dialogTitle" :visible.sync="dialogShow" width="30%">

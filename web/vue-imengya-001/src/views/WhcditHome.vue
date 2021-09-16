@@ -3,7 +3,7 @@
     <div class="local-home-head">
       <el-row>
         <el-col :span="6" class="local-home-head-col1">
-          <el-popover placement="bottom-start" title="导航菜单" width="200" trigger="hover">
+          <el-popover placement="bottom-start" width="200" trigger="hover">
             <div slot="reference"><img class="local-home-logo" src="../../static/image/logo1.png"/></div>
             <el-menu class="local-home-menu" unique-opened router :default-active="activeRouter" @select="menuMethodSelect">
               <!-- 树枝菜单 <i :class="branch.systemMenuIcon"></i>去掉图标 -->
