@@ -17,4 +17,8 @@ public interface SystemRoleRelationMapper {
     int updateByPrimaryKeySelective(SystemRoleRelation record);
 
     int updateByPrimaryKey(SystemRoleRelation record);
+
+//	List<SystemRoleRelation> selectWithRoleId(Integer rid);
+
+	int deleteWithCondition(SystemRoleRelation param);
 }

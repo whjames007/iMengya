@@ -44,7 +44,7 @@ export default {
       totalRows: 0, // 总行数
       dialogShow: false,
       dialogTitle: null, // 对话框标题
-      dialogData: {uid: null, systemRoleId: null, systemRoleCode: null, systemRoleName: null, systemRoleDesc: null, relations: [], leafs: []},
+      dialogData: {uid: null, systemRoleId: null, systemRoleCode: null, systemRoleName: null, systemRoleDesc: null, menus: [], leafs: []},
       dialogRules: {systemRoleName: this.whc.cont.ruleArr001, systemRoleDesc: this.whc.cont.ruleArr002}, // 各校验对象名称要和参数名称一致
       trees: [],
       treeProps: {label: 'systemMenuName', children: 'childs'},
@@ -53,14 +53,14 @@ export default {
   },
   mounted () { this.whc.func.paramInit(this.param); this.tableMethodPage(); console.info(log, 'mounted') },
   methods: {
-    treeMethodInit () { this.$axios.post(this.whc.cont.url.menuTree, {}).then((res) => { if (this.whc.func.respSuccess(res.data.code)) { this.trees = []; this.trees.push(res.data.info) } else { this.whc.func.respParse(this, res.data.code) } }) },
-    tableMethodPage () { this.whc.func.postMethodPage(this, this.whc.cont.url.rolePage, this.param) },
+    treeMethodInit () { this.$axios.post(this.whc.cont.menuTree, {}).then((res) => { if (this.whc.func.respSuccess(res.data.code)) { this.trees = []; this.trees.push(res.data.info) } else { this.whc.func.respParse(this, res.data.code) } }) },
+    tableMethodPage () { this.whc.func.postMethodPage(this, this.whc.cont.rolePage, this.param) },
     dialogMethodOpen (val) {
       this.dialogShow = true
       this.dialogData.uid = this.param.uid
       this.treeMethodInit()
       this.treeChecks = []
-      val.relations.forEach(e => {
+      val.menus.forEach(e => {
         this.treeChecks.push(e.systemMenuId)
       })
       if (val) { // 编辑
@@ -70,12 +70,12 @@ export default {
         this.dialogData.systemRoleCode = crow.systemRoleCode
         this.dialogData.systemRoleName = crow.systemRoleName
         this.dialogData.systemRoleDesc = crow.systemRoleDesc
-        this.dialogData.relations = crow.relations
+        this.dialogData.menus = crow.menus
       }
     },
     dialogMethodSave () {
       this.dialogData.leafs = this.$refs.tree.getCheckedKeys()
-      this.$axios.post(this.whc.cont.url.roleEdit, this.dialogData).then((res) => {
+      this.$axios.post(this.whc.cont.roleEdit, this.dialogData).then((res) => {
         if (this.whc.func.respSuccess(res.data.code)) {
           this.tableMethodPage()
           this.dialogMethodClose()

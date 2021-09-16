@@ -17,7 +17,9 @@
     <!-- 操作对话框 -->
     <el-dialog :title="dialogTitle" :visible.sync="dialogShow" width="30%">
       <el-form :model="dialogData" ref="dialogData" :rules="dialogRules" size="mini" label-width="100px">
-        <el-form-item label="菜单名称" prop="systemMenuName"><el-input v-model.trim="dialogData.systemMenuName"></el-input></el-form-item>
+        <el-form-item label="菜单名称" prop="systemMenuName"><el-input v-model="dialogData.systemMenuName"></el-input></el-form-item>
+        <el-form-item label="菜单图标" prop="systemMenuIcon"><el-input v-model="dialogData.systemMenuIcon"></el-input></el-form-item>
+        <el-form-item label="菜单路由" prop="systemMenuUrl"><el-input v-model="dialogData.systemMenuUrl"></el-input></el-form-item>
         <el-form-item class="whc-dialog-button"><el-button type='primary' plain icon="el-icon-folder" @click="dialogMethodClose">取消</el-button><el-button type='primary' size="mini" icon="el-icon-folder-checked" @click="dialogMethodSave">确认</el-button></el-form-item>
       </el-form>
     </el-dialog>
@@ -35,8 +37,8 @@ export default {
       totalRows: 0,
       dialogShow: false,
       dialogTitle: this.whc.cont.edit, // 对话框标题
-      dialogData: {uid: null, systemMenuId: null, systemMenuName: null},
-      dialogRules: {systemMenuName: this.whc.cont.ruleArr001}, // 各校验对象名称要和参数名称一致
+      dialogData: {uid: null, systemMenuId: null, systemMenuName: null, systemMenuIcon: null, systemMenuUrl: null},
+      dialogRules: {systemMenuName: this.whc.cont.ruleArr001, systemMenuIcon: this.whc.cont.ruleArr001, systemMenuUrl: this.whc.cont.ruleArr001}, // 各校验对象名称要和参数名称一致
       aaaaa: 1
     }
   },
@@ -57,9 +59,11 @@ export default {
       let crow = this.whc.func.clone(val)
       this.dialogData.systemMenuId = crow.systemMenuId
       this.dialogData.systemMenuName = crow.systemMenuName
+      this.dialogData.systemMenuIcon = crow.systemMenuIcon
+      this.dialogData.systemMenuUrl = crow.systemMenuUrl
     },
     dialogMethodSave () {
-      this.$axios.post(this.whc.cont.url.menuEdit, this.dialogData).then((res) => {
+      this.$axios.post(this.whc.cont.menuEdit, this.dialogData).then((res) => {
         if (this.whc.func.respSuccess(res.data.code)) {
           this.tableMethodPage()
           this.dialogMethodClose()

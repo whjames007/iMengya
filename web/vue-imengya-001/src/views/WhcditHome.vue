@@ -18,20 +18,17 @@
         </el-col>
         <el-col :span="12" class="local-home-head-col2">
           <el-tabs class="local-home-head-tabs" v-model="activetaber" type="card" @tab-click="tabsMethodClick" @tab-remove="tabsMethodClose">
-            <el-tab-pane :key="item.systemMenuUrl" v-for="(item) in tabsList" :label="item.systemMenuName" :name="item.systemMenuUrl"
-            :closable="item.systemBoolClose"></el-tab-pane>
+            <el-tab-pane :key="item.systemMenuUrl" v-for="(item) in tabsList" :label="item.systemMenuName" :name="item.systemMenuUrl" :closable="item.systemBoolClose"></el-tab-pane>
           </el-tabs>
         </el-col>
         <el-col :span="6" class="local-home-head-col3">
-          <div class="local-home-user"><i class="el-icon-setting"></i></div>
-          <div class="local-home-user">{{user.systemUserNickname}}[{{user.systemRoleName}}]</div>
-          <div class="local-home-user"></div>
-          <div class="local-home-user" @click="loginMethodOut"><i class="el-icon-right"></i></div>
+          <el-button type="primary" icon="el-icon-setting" @click="userMethodSet">{{user.systemUserNickname}}[{{user.systemRoleName}}]</el-button>
+          <el-button circle type="primary" icon="el-icon-right" @click="userMethodOut"></el-button>
         </el-col>
       </el-row>
     </div>
     <div class="local-home-brmb"><el-breadcrumb separator-class="el-icon-arrow-right"><el-breadcrumb-item><i class="el-icon-s-home"></i>  {{activeMenu.systemSecondName}}</el-breadcrumb-item><el-breadcrumb-item>{{activeMenu.systemThirdName}}</el-breadcrumb-item></el-breadcrumb></div>
-    <div class="local-home-main">{{activeRouter}}
+    <div class="local-home-main">
       <div class="local-home-router"><router-view/></div>
     </div>
     <div class="local-home-foot">版权 1999-2021 戴尔公司 (Dell Inc.) 仅适用于中国客户的内容设计 版权所有</div>
@@ -40,8 +37,9 @@
 
 <script>
 const log = '【主页框架页面】'
-const activeMenu = 'activeMenu'
-const activeTabs = 'activeTabs'
+const keyActiveMenu = 'keyActiveMenu'
+const keyActiveTabs = 'keyActiveTabs'
+const defultRouter = 'summary'
 export default {
   name: 'WhcditHome',
   data () {
@@ -49,9 +47,9 @@ export default {
       user: {},
       menu: {},
       leafs: [], // 叶子集合
-      activeRouter: 'summary',
+      activeRouter: '',
       activeMenu: {},
-      activetaber: 'summary',
+      activetaber: '',
       tabsList: [],
       msg: 'Welcome to Your Vue.js App'
     }
@@ -60,21 +58,34 @@ export default {
   methods: {
     mountedMethodInit () {
       this.user = this.whc.func.getUser()
+      if (!this.user) {
+        this.$message.error('您好，请先登录！')
+        this.$router.push({name: 'login'})
+        return
+      }
       this.menu = this.user.menu
       let arr = [] // 拼凑叶子集合
       this.menu.childs.forEach(branch => {
         arr = arr.concat(branch.childs)
       })
       this.leafs = arr
-      // TODO 确定当前活动对象以及选项卡列表
-      this.activeRouter = 'summary'
-      this.menuMethodSelect('summary')
-      console.info(log, 'mounted')
-    },
-    menuMethodSelect (key, keyPath) {
-      this.menuMethodOper(key)
+      // 确定当前活动对象以及选项卡列表
+      let jstrMenu = sessionStorage.getItem(keyActiveMenu)
+      if (jstrMenu) {
+        // 如果有缓存，获取这些内容吧
+        let jsonMenu = JSON.parse(jstrMenu)
+        this.activeRouter = jsonMenu.systemMenuUrl
+        this.activetaber = jsonMenu.systemMenuUrl
+        this.activeMenu = jsonMenu
+        let jstrTabs = sessionStorage.getItem(keyActiveTabs)
+        this.tabsList = JSON.parse(jstrTabs)
+      } else {
+        // 如果无缓存，则构造系统简介相关的默认路由
+        this.menuMethodOper(defultRouter)
+      }
     },
     menuMethodFind (val) { for (const key in this.leafs) { const ele = this.leafs[key]; if (val === ele.systemMenuUrl) { return ele } } },
+    menuMethodSelect (key, keyPath) { this.menuMethodOper(key) },
     menuMethodOper (val) {
       let who = this.menuMethodFind(val) // 本方法是菜单对象的操作流程，先获取目标对象
       this.activeRouter = val
@@ -85,28 +96,47 @@ export default {
       // 如果没有，就向选项卡列表push该菜单
       if (!tabsHave) { this.tabsList.push(who) }
       // 缓存当前活动对象以及选项卡列表
-      sessionStorage.setItem(activeMenu, JSON.stringify(this.activeMenu))
-      sessionStorage.setItem(activeTabs, JSON.stringify(this.tabsList))
+      sessionStorage.setItem(keyActiveMenu, JSON.stringify(this.activeMenu))
+      sessionStorage.setItem(keyActiveTabs, JSON.stringify(this.tabsList))
     },
-
-    loginMethodOut () { this.$confirm('确定要退出系统吗？', '提示', {type: 'warning'}).then(() => { sessionStorage.clear(); this.$router.push({name: 'login'}) }).catch(() => { console.info(log, `用户放弃了退出操作！`) }) },
     tabsMethodClick (tab, event) {
       let tname = tab.name
       if (tname === this.activeRouter) {
         console.info(log, '点击的是当前页，不做任何操作')
       } else {
-      // 选项卡也要走菜单对象操作流程，可以直接路由
+      // 选项卡也要走菜单对象操作流程，然后可以直接路由
         this.menuMethodOper(tname)
         this.$router.push({name: this.activeRouter})
       }
     },
-    tabsMethodClose (target) {
-      // 菜单横向列表的关闭方法，先执行会话缓存清理：更新会话缓存中的菜单横向列表，然后重新获取
-      console.info(log, target)
+    tabsMethodFind (val) { for (const key in this.tabsList) { const ele = this.tabsList[key]; if (val === ele.systemMenuUrl) { return ele } } },
+    tabsMethodClose (val) {
+      debugger
+      // 先获取此项的前一个成员，以及本项的索引
+      let prev = null
+      let acti = -1
+      for (let i = 0; i < this.tabsList.length; i++) {
+        const item = this.tabsList[i]
+        if (val === item.systemMenuUrl) {
+          prev = this.tabsList[i - 1]
+          acti = i
+          break
+        }
+      }
+      // 从选项卡列表中移除此项
+      this.tabsList.splice(acti, 1)
+      console.info(log, val, prev, this.tabsList)
+      // 选项卡的关闭方法，先判断要关闭的是否是当前页面
+      if (val === this.activetaber) {
+        console.info(log, '要关闭的是当前页面啊，要动路由了', acti)
+        this.tabsMethodClick({name: prev.systemMenuUrl}, null)
+      } else {
+        console.info(log, '要关闭的不是当前页面，重新缓存一下选项卡列表即可')
+        sessionStorage.setItem(keyActiveTabs, JSON.stringify(this.tabsList))
+      }
     },
-    aaa () {
-      console.info(log, '登陆成功，即将跳转进入主页面')
-    }
+    userMethodSet () { this.$confirm('您好，您确定要退出本系统吗？', '提示', {type: 'warning'}).then(() => { sessionStorage.clear(); this.$router.push({name: 'login'}) }).catch(() => { console.info(log, `用户放弃了退出操作！`) }) },
+    userMethodOut () { this.$confirm('您好，您确定要退出本系统吗？', '提示', {type: 'warning'}).then(() => { sessionStorage.clear(); this.$router.push({name: 'login'}) }).catch(() => { console.info(log, `用户放弃了退出操作！`) }) }
   }
 }
 </script>
@@ -121,7 +151,6 @@ export default {
 .local-home-head-tabs {background: #FFFFFF; width: 50vw;}
 .local-home-head-col3 {height: 6vh; display: flex; align-items: center; justify-content: flex-end; padding: 0px 10px 0px 0px; color: #FFFFFF;}
 .local-home-logo {height: 4vh; margin: 0px 0px 0px 10px;}
-.local-home-user {padding: 0px 10px 0px 0px;}
 
 .local-home-router {padding: 10px 10px 10px 10px;}
 

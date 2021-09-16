@@ -31,11 +31,7 @@ let func = {
       case gresp + '30005': res = '您好，此部门尚有关联用户，请先解除其关联关系！'; break
       default: res = '未知的异常：' + code; break
     }
-    if (res === '10000') {
-      return true
-    } else {
-      my.$message.error(res)
-    }
+    if (res === '10000') { return true } else { my.$message.error(res) }
   },
   getUser () {
     let json = sessionStorage.getItem(keyUser)

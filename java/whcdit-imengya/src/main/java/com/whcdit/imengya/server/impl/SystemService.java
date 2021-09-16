@@ -2,7 +2,6 @@ package com.whcdit.imengya.server.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -20,6 +19,7 @@ import com.whcdit.imengya.mapper.SystemRoleRelationMapper;
 import com.whcdit.imengya.mapper.SystemUserInfoMapper;
 import com.whcdit.imengya.model.SystemMenuInfo;
 import com.whcdit.imengya.model.SystemRoleInfo;
+import com.whcdit.imengya.model.SystemRoleRelation;
 import com.whcdit.imengya.model.SystemUserInfo;
 import com.whcdit.imengya.server.ISystemService;
 import com.whcdit.imengya.utils.WhcditConstants;
@@ -204,54 +204,56 @@ public class SystemService extends BaseService implements ISystemService {
 		return systemRoleInfoMapper.selectWithCondition(param);
 	}
 
-//	@Override
-//	public PageInfo<SystemRoleInfo> rolePage(SystemRoleInfo param) {
-//		super.pageInit(param);
-//		List<SystemRoleInfo> list = systemRoleInfoMapper.selectWithCondition(param);
-//		for (SystemRoleInfo role : list) {
-//			List<SystemRoleRelation> relations = systemRoleRelationMapper.selectWithRoleId(role.getSystemRoleId());
-//			role.setRelations(relations);
-//		}
-//		PageInfo<SystemRoleInfo> res = new PageInfo<>(list);
-//		return res;
-//	}
-//
-//	@Override
-//	public int roleEdit(SystemRoleInfo param) {
-//		super.settingWithUpdate(param, "修改一条角色数据");
-//		int res = systemRoleInfoMapper.updateByPrimaryKeySelective(param);
-//		// 先清理目标角色的关联关系
-//		SystemRoleRelation psrr = new SystemRoleRelation();
-//		psrr.setSystemRoleId(param.getSystemRoleId());
-//		systemRoleRelationMapper.deleteWithCondition(psrr);
-//		// 再重构目标角色的关联关系（维持前端tree组件提供的不完整菜单ID，可能包含根节点，也可能包含分支节点，留待登录方法中进行倒追溯）
-//		psrr.setUid(param.getUid());
-//		for (Integer lid : param.getLeafs()) {
-//			super.settingWithInsert(psrr, "重构目标角色的关联关系（维持前端tree组件提供的不完整菜单ID，可能包含根节点，也可能包含分支节点，留待登录方法中进行倒追溯）");
-//			psrr.setSystemMenuId(lid);
-//			psrr.setRelationId(null);
-//			systemRoleRelationMapper.insertSelective(psrr);
-//		}
-//		return res;
-//	}
-//
-//	@Override
-//	public SystemMenuInfo menuTree(SystemMenuInfo param) {
-//		SystemMenuInfo root = systemMenuInfoMapper.selectByPrimaryKey(1);
-//		SystemMenuInfo pbranch = new SystemMenuInfo();
-//		super.settingValid(pbranch);
-//		pbranch.setSystemParentId(root.getSystemMenuId());
-//		List<SystemMenuInfo> branchs = systemMenuInfoMapper.selectWithCondition(pbranch);
-//		for (SystemMenuInfo bra : branchs) {
-//			SystemMenuInfo pleaf = new SystemMenuInfo();
-//			super.settingValid(pleaf);
-//			pleaf.setSystemParentId(bra.getSystemMenuId());
-//			List<SystemMenuInfo> leafs = systemMenuInfoMapper.selectWithCondition(pleaf);
-//			bra.setChilds(leafs);
-//		}
-//		root.setChilds(branchs);
-//		return root;
-//	}
+	@Override
+	public PageInfo<SystemRoleInfo> rolePage(SystemRoleInfo param) {
+		super.pageInit(param);
+		List<SystemRoleInfo> list = systemRoleInfoMapper.selectWithCondition(param);
+		// 获取每个角色的权限菜单数据
+		for (SystemRoleInfo role : list) {
+			List<SystemMenuInfo> menus = systemMenuInfoMapper.selectWithRole(role);
+			role.setMenus(menus);
+		}
+		PageInfo<SystemRoleInfo> res = new PageInfo<>(list);
+		return res;
+	}
+
+	@Transactional
+	@Override
+	public int roleEdit(SystemRoleInfo param) {
+		super.settingWithUpdate(param, "修改一条角色数据");
+		int res = systemRoleInfoMapper.updateByPrimaryKeySelective(param);
+		// 先清理目标角色的关联关系
+		SystemRoleRelation psrr = new SystemRoleRelation();
+		psrr.setSystemRoleId(param.getSystemRoleId());
+		systemRoleRelationMapper.deleteWithCondition(psrr);
+		// 再重构目标角色的关联关系（维持前端tree组件提供的不完整菜单ID，可能包含根节点，也可能包含分支节点，留待登录方法中进行倒追溯）
+		psrr.setUid(param.getUid());
+		for (Integer lid : param.getLeafs()) {
+			super.settingWithInsert(psrr, "重构目标角色的关联关系（维持前端tree组件提供的不完整菜单ID，可能包含根节点，也可能包含分支节点，留待登录方法中进行倒追溯）");
+			psrr.setSystemMenuId(lid);
+			psrr.setRoleRelationId(null);
+			systemRoleRelationMapper.insertSelective(psrr);
+		}
+		return res;
+	}
+
+	@Override
+	public SystemMenuInfo menuTree(SystemMenuInfo param) {
+		SystemMenuInfo root = systemMenuInfoMapper.selectByPrimaryKey(1);
+		SystemMenuInfo pbranch = new SystemMenuInfo();
+		super.settingValid(pbranch);
+		pbranch.setSystemParentId(root.getSystemMenuId());
+		List<SystemMenuInfo> branchs = systemMenuInfoMapper.selectWithCondition(pbranch);
+		for (SystemMenuInfo bra : branchs) {
+			SystemMenuInfo pleaf = new SystemMenuInfo();
+			super.settingValid(pleaf);
+			pleaf.setSystemParentId(bra.getSystemMenuId());
+			List<SystemMenuInfo> leafs = systemMenuInfoMapper.selectWithCondition(pleaf);
+			bra.setChilds(leafs);
+		}
+		root.setChilds(branchs);
+		return root;
+	}
 
 	@Override
 	public List<SystemMenuInfo> menuList(SystemMenuInfo param) {
@@ -259,12 +261,12 @@ public class SystemService extends BaseService implements ISystemService {
 		return systemMenuInfoMapper.selectWithCondition(param);
 	}
 
-//	@Override
-//	public int menuEdit(SystemMenuInfo param) {
-//		super.settingWithUpdate(param, "修改菜单数据");
-//		return systemMenuInfoMapper.updateByPrimaryKeySelective(param);
-//	}
-//
+	@Override
+	public int menuEdit(SystemMenuInfo param) {
+		super.settingWithUpdate(param, "修改菜单数据");
+		return systemMenuInfoMapper.updateByPrimaryKeySelective(param);
+	}
+
 //	@Override
 //	public int configAdd(SystemConfigInfo param) {
 //		super.settingWithInsert(param, "新增一条参数配置数据");

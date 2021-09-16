@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.whcdit.imengya.model.SystemMenuInfo;
+import com.whcdit.imengya.model.SystemRoleInfo;
 
 @Mapper
 public interface SystemMenuInfoMapper {
@@ -21,4 +22,6 @@ public interface SystemMenuInfoMapper {
     int updateByPrimaryKey(SystemMenuInfo record);
 
 	List<SystemMenuInfo> selectWithCondition(SystemMenuInfo param);
+
+	List<SystemMenuInfo> selectWithRole(SystemRoleInfo role);
 }

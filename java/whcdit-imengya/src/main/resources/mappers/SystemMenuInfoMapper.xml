@@ -227,4 +227,31 @@
     </where>
 ORDER BY system_menu_id ASC
   </select>
+  
+  <select id="selectWithRole" parameterType="com.whcdit.imengya.model.SystemRoleInfo" resultType="com.whcdit.imengya.model.SystemMenuInfo">
+SELECT
+	b.role_relation_id AS roleRelationId,
+	b.system_role_id AS systemRoleId,
+	a.system_menu_id AS systemMenuId,
+	a.system_menu_name AS systemMenuName,
+	a.system_menu_type AS systemMenuType,
+	a.system_menu_icon AS systemMenuIcon,
+	a.system_menu_url AS systemMenuUrl,
+	a.system_parent_id AS systemParentId,
+	a.system_menu_close AS systemMenuClose,
+	a.system_menu_desc AS systemMenuDesc,
+	a.first_create_by AS firstCreateBy,
+	a.first_create_date AS firstCreateDate,
+	a.data_status_flag AS dataStatusFlag,
+	a.data_region_id AS dataRegionId,
+	a.data_change_type AS dataChangeType,
+	a.data_change_desc AS dataChangeDesc,
+	a.last_update_by AS lastUpdateBy,
+	a.last_update_date AS lastUpdateDate 
+FROM
+	system_menu_info a
+	JOIN system_role_relation b ON a.system_menu_id = b.system_menu_id
+WHERE b.system_role_id = #{systemRoleId,jdbcType=INTEGER}
+  </select>
+  
 </mapper>

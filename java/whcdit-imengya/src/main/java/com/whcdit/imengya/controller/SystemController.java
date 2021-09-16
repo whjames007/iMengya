@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageInfo;
+import com.whcdit.imengya.model.SystemMenuInfo;
+import com.whcdit.imengya.model.SystemRoleInfo;
 import com.whcdit.imengya.model.SystemUserInfo;
 import com.whcdit.imengya.server.ISystemService;
 import com.whcdit.imengya.utils.WhcditConstants;
@@ -68,6 +70,38 @@ public class SystemController {
 		return res;
 	}
 
+//	@ApiOperation("用户删除接口")
+	@PostMapping(puser + "del")
+	public Object userDel(@RequestBody SystemUserInfo param) {
+		WhcditResponse<SystemUserInfo> res = new WhcditResponse<>();
+		try {
+			systemService.userDel(param);
+			res.buildSuccess(param, null, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.buildFailure(WhcditConstants.WHCDIT_RESPONSE_20001, e.getMessage());
+		}
+		return res;
+	}
+
+//	@ApiOperation("用户修改接口")
+	@PostMapping(puser + "edit")
+	public Object userEdit(@RequestBody SystemUserInfo param) {
+		WhcditResponse<SystemUserInfo> res = new WhcditResponse<>();
+		try {
+			if (systemService.userRepeat(param)) {
+				res.buildFailure(WhcditConstants.WHCDIT_RESPONSE_30002, "用户帐号重复");
+			} else {
+				systemService.userEdit(param);
+				res.buildSuccess(param, null, null);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.buildFailure(WhcditConstants.WHCDIT_RESPONSE_20001, e.getMessage());
+		}
+		return res;
+	}
+
 //	@ApiOperation("用户分页接口")
 	@PostMapping(puser + "page")
 	public Object userPage(@RequestBody SystemUserInfo param) {
@@ -81,4 +115,87 @@ public class SystemController {
 		}
 		return res;
 	}
+
+	private static final String prole = "/role/";
+
+	@PostMapping(prole + "list")
+	public Object roleList(@RequestBody SystemRoleInfo param) {
+		WhcditResponse<SystemRoleInfo> res = new WhcditResponse<>();
+		try {
+			List<SystemRoleInfo> list = systemService.roleList(param);
+			res.buildSuccess(null, list, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.buildFailure(WhcditConstants.WHCDIT_RESPONSE_20001, e.getMessage());
+		}
+		return res;
+	}
+
+	@PostMapping(prole + "page")
+	public Object rolePage(@RequestBody SystemRoleInfo param) {
+		WhcditResponse<SystemRoleInfo> res = new WhcditResponse<>();
+		try {
+			PageInfo<SystemRoleInfo> page = systemService.rolePage(param);
+			res.buildSuccess(null, null, page);
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.buildFailure(WhcditConstants.WHCDIT_RESPONSE_20001, e.getMessage());
+		}
+		return res;
+	}
+
+	@PostMapping(prole + "edit")
+	public Object roleEdit(@RequestBody SystemRoleInfo param) {
+		WhcditResponse<SystemRoleInfo> res = new WhcditResponse<>();
+		try {
+			systemService.roleEdit(param);
+			res.buildSuccess(param, null, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.buildFailure(WhcditConstants.WHCDIT_RESPONSE_20001, e.getMessage());
+		}
+		return res;
+	}
+
+	private static final String pmenu = "/menu/";
+
+	@PostMapping(pmenu + "tree")
+	public Object menuTree(@RequestBody SystemMenuInfo param) {
+		WhcditResponse<SystemMenuInfo> res = new WhcditResponse<>();
+		try {
+			SystemMenuInfo tree = systemService.menuTree(param);
+			res.buildSuccess(tree, null, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.buildFailure(WhcditConstants.WHCDIT_RESPONSE_20001, e.getMessage());
+		}
+		return res;
+	}
+
+	@PostMapping(pmenu + "list")
+	public Object menuList(@RequestBody SystemMenuInfo param) {
+		WhcditResponse<SystemMenuInfo> res = new WhcditResponse<>();
+		try {
+			List<SystemMenuInfo> list = systemService.menuList(param);
+			res.buildSuccess(null, list, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.buildFailure(WhcditConstants.WHCDIT_RESPONSE_20001, e.getMessage());
+		}
+		return res;
+	}
+
+	@PostMapping(pmenu + "edit")
+	public Object menuEdit(@RequestBody SystemMenuInfo param) {
+		WhcditResponse<SystemMenuInfo> res = new WhcditResponse<>();
+		try {
+			systemService.menuEdit(param);
+			res.buildSuccess(param, null, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.buildFailure(WhcditConstants.WHCDIT_RESPONSE_20001, e.getMessage());
+		}
+		return res;
+	}
+
 }

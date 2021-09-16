@@ -26,17 +26,17 @@ public interface ISystemService extends IBaseService {
 	// 角色系列
 	public List<SystemRoleInfo> roleList(SystemRoleInfo param);
 
-//	public PageInfo<SystemRoleInfo> rolePage(SystemRoleInfo param);
-//
-//	public int roleEdit(SystemRoleInfo param);
-//
-//	// 菜单系列
-//	public SystemMenuInfo menuTree(SystemMenuInfo param);
+	public PageInfo<SystemRoleInfo> rolePage(SystemRoleInfo param);
+
+	public int roleEdit(SystemRoleInfo param);
+
+	// 菜单系列
+	public SystemMenuInfo menuTree(SystemMenuInfo param);
 
 	public List<SystemMenuInfo> menuList(SystemMenuInfo param);
 
-//	public int menuEdit(SystemMenuInfo param);
-//
+	public int menuEdit(SystemMenuInfo param);
+
 //	// 参数配置系列
 //	public int configAdd(SystemConfigInfo param);
 //

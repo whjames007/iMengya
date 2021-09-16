@@ -156,4 +156,11 @@
       last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP}
     where role_relation_id = #{roleRelationId,jdbcType=INTEGER}
   </update>
+  
+  <delete id="deleteWithCondition" parameterType="com.whcdit.imengya.model.SystemRoleRelation">
+    delete from system_role_relation
+    where system_role_id = #{systemRoleId,jdbcType=INTEGER}
+  </delete>
+  
+  
 </mapper>
