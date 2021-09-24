@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 查询条件 -->
-    <el-form :model="param" size="mini" label-width="100px">
+    <el-form :model="param" :size="whc.cont.size" label-width="100px">
       <el-row>
         <el-col :span="6"><el-form-item label="用户工号"><el-input v-model="param.systemUserAccount" :placeholder="whc.cont.vague"></el-input></el-form-item></el-col>
         <el-col :span="6"><el-form-item label="用户名称"><el-input v-model="param.systemUserNickname" :placeholder="whc.cont.vague"></el-input></el-form-item></el-col>
@@ -14,15 +14,21 @@
       </el-row>
     </el-form>
     <!-- 分页表格 -->
-    <el-table :data="pages" size="mini" stripe border highlight-current-row>
+    <el-table :data="pages" :size="whc.cont.size" stripe border highlight-current-row>
       <el-table-column prop="length" label="序号" type="index" width="60"/>
-      <el-table-column label="最后登录时间" show-overflow-tooltip><template slot-scope="scope">{{whc.dfmt.dts(scope.row.lastLoginTime)}}</template></el-table-column>
-      <el-table-column prop="systemRoleName" label="用户角色" show-overflow-tooltip/>
-      <el-table-column prop="systemCenterName" label="中心名称" show-overflow-tooltip/>
-      <el-table-column prop="systemDepartmentName" label="部门名称" show-overflow-tooltip/>
-      <el-table-column prop="systemUserAccount" label="工号" show-overflow-tooltip/>
+      <el-table-column prop="systemUserType" label="用户类型" show-overflow-tooltip/>
+      <el-table-column label="最后登录时间" width="140"><template slot-scope="scope">{{whc.dfmt.dts(scope.row.lastLoginTime)}}</template></el-table-column>
+      <el-table-column prop="systemUserAccount" label="用户账号" show-overflow-tooltip/>
       <el-table-column prop="systemUserNickname" label="用户名称" show-overflow-tooltip/>
-      <el-table-column prop="systemUserAccname" label="用户联名" show-overflow-tooltip/>
+      <el-table-column prop="systemRoleName" label="用户角色" show-overflow-tooltip/>
+      <el-table-column prop="systemUserImage" label="用户头像" show-overflow-tooltip/>
+      <el-table-column prop="checkQuestionFlag" label="问答校验标识" show-overflow-tooltip/>
+      <el-table-column prop="checkQuestionFirst" label="预设问题1" show-overflow-tooltip/>
+      <el-table-column prop="checkQuestionSecond" label="预设问题2" show-overflow-tooltip/>
+      <el-table-column prop="checkQuestionThird" label="预设问题3" show-overflow-tooltip/>
+      <el-table-column prop="checkAnswerFirst" label="预设答案1" show-overflow-tooltip/>
+      <el-table-column prop="checkAnswerSecond" label="预设答案2" show-overflow-tooltip/>
+      <el-table-column prop="checkAnswerThird" label="预设答案3" show-overflow-tooltip/>
       <el-table-column label="最后更新时间" width="140"><template slot-scope="scope">{{whc.dfmt.dts(scope.row.lastUpdateDate)}}</template></el-table-column>
       <el-table-column label="操作" width="140"><template slot-scope="scope"><el-link type="primary" @click="dialogMethodOpen(scope.row)">编辑</el-link> <el-link type="danger" @click="tableMethodDel(scope.row)">删除</el-link> <el-link type="success" @click="tableMethodInit(scope.row)">初始化</el-link></template></el-table-column>
     </el-table>

@@ -7,7 +7,7 @@
       <el-table-column prop="systemRoleName" label="角色名称" show-overflow-tooltip/>
       <el-table-column prop="systemRoleCode" label="角色代码" show-overflow-tooltip/>
       <el-table-column prop="systemRoleDesc" label="角色描述" show-overflow-tooltip/>
-      <el-table-column label="最后更新时间" show-overflow-tooltip><template slot-scope="scope">{{whc.dfmt.dts(scope.row.lastUpdateDate)}}</template></el-table-column>
+      <el-table-column label="最后更新时间" width="140"><template slot-scope="scope">{{whc.dfmt.dts(scope.row.lastUpdateDate)}}</template></el-table-column>
       <el-table-column label="操作" width="120"><template slot-scope="scope"><el-link type="primary" @click="dialogMethodOpen(scope.row)">编辑</el-link></template></el-table-column>
     </el-table>
     <div class="whc-div-pagination"><el-pagination @size-change="tableMethodSize" @current-change="tableMethodCurr" :current-page="param.pageNum" :page-sizes="whc.cont.pageArray" :page-size="param.pageSize" background layout="total, sizes, prev, pager, next, jumper" :total="totalRows"></el-pagination></div>
@@ -15,16 +15,16 @@
     <el-dialog :title="dialogTitle" :visible.sync="dialogShow" width="50%" @close="dialogMethodClose">
       <div class="local-role-dialog">
         <div class="local-role-dleft">
-          编辑角色信息
+          <el-tag type="info" effect="plain">编辑角色信息</el-tag>
           <el-form :model="dialogData" ref="dialogData" :rules="dialogRules" size="mini" label-width="100px">
             <el-form-item label="角色编号"><el-input v-model.trim="dialogData.systemRoleId" disabled></el-input></el-form-item>
             <el-form-item label="角色名称" prop="systemRoleName"><el-input v-model.trim="dialogData.systemRoleName"></el-input></el-form-item>
-            <el-form-item label="角色代码"><el-input v-model.trim="dialogData.systemRoleCode" disabled></el-input></el-form-item>
+            <el-form-item label="角色代码"><el-input v-model.trim="dialogData.systemRoleCode"></el-input></el-form-item>
             <el-form-item label="角色描述" prop="systemRoleDesc"><el-input v-model.trim="dialogData.systemRoleDesc"></el-input></el-form-item>
           </el-form>
         </div>
         <div class="local-role-dright">
-          编辑菜单权限
+          <el-tag type="info" effect="plain">编辑菜单权限</el-tag>
           <el-tree :data="trees" show-checkbox node-key="systemMenuId" :props="treeProps" :default-expand-all="true" :default-checked-keys="treeChecks" ref="tree"></el-tree>
         </div>
       </div>
@@ -60,9 +60,7 @@ export default {
       this.dialogData.uid = this.param.uid
       this.treeMethodInit()
       this.treeChecks = []
-      val.menus.forEach(e => {
-        this.treeChecks.push(e.systemMenuId)
-      })
+      val.menus.forEach(e => { this.treeChecks.push(e.systemMenuId) })
       if (val) { // 编辑
         this.dialogTitle = this.whc.cont.edit
         let crow = this.whc.func.clone(val)

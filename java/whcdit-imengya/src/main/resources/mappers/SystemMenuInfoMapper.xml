@@ -223,6 +223,7 @@
     from system_menu_info
     <where>
     	<if test="dataStatusFlag != null"> data_status_flag = #{dataStatusFlag,jdbcType=VARCHAR}</if>
+	    <if test="systemParentId != null">AND system_parent_id = #{systemParentId,jdbcType=INTEGER}</if>
 	    <if test="systemRoleId != null">AND system_menu_id IN (SELECT x.system_menu_id FROM system_role_relation x where x.system_role_id = #{systemRoleId,jdbcType=INTEGER})</if>
     </where>
 ORDER BY system_menu_id ASC
