@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whcdit.imengya.mapper.ProjectDefectFlowMapper">
+  <resultMap id="BaseResultMap" type="com.whcdit.imengya.model.ProjectDefectFlow">
+    <id column="defect_flow_id" jdbcType="INTEGER" property="defectFlowId" />
+    <result column="project_defect_id" jdbcType="INTEGER" property="projectDefectId" />
+    <result column="defect_flow_type" jdbcType="VARCHAR" property="defectFlowType" />
+    <result column="flow_sender_id" jdbcType="INTEGER" property="flowSenderId" />
+    <result column="defect_flow_time" jdbcType="TIMESTAMP" property="defectFlowTime" />
+    <result column="flow_receiver_id" jdbcType="INTEGER" property="flowReceiverId" />
+    <result column="defect_flow_desc" jdbcType="VARCHAR" property="defectFlowDesc" />
+    <result column="first_create_by" jdbcType="INTEGER" property="firstCreateBy" />
+    <result column="first_create_date" jdbcType="TIMESTAMP" property="firstCreateDate" />
+    <result column="data_status_flag" jdbcType="VARCHAR" property="dataStatusFlag" />
+    <result column="data_region_id" jdbcType="INTEGER" property="dataRegionId" />
+    <result column="data_change_type" jdbcType="VARCHAR" property="dataChangeType" />
+    <result column="data_change_desc" jdbcType="VARCHAR" property="dataChangeDesc" />
+    <result column="last_update_by" jdbcType="INTEGER" property="lastUpdateBy" />
+    <result column="last_update_date" jdbcType="TIMESTAMP" property="lastUpdateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    defect_flow_id, project_defect_id, defect_flow_type, flow_sender_id, defect_flow_time, 
+    flow_receiver_id, defect_flow_desc, first_create_by, first_create_date, data_status_flag, 
+    data_region_id, data_change_type, data_change_desc, last_update_by, last_update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from project_defect_flow
+    where defect_flow_id = #{defectFlowId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from project_defect_flow
+    where defect_flow_id = #{defectFlowId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="defect_flow_id" keyProperty="defectFlowId" parameterType="com.whcdit.imengya.model.ProjectDefectFlow" useGeneratedKeys="true">
+    insert into project_defect_flow (project_defect_id, defect_flow_type, 
+      flow_sender_id, defect_flow_time, flow_receiver_id, 
+      defect_flow_desc, first_create_by, first_create_date, 
+      data_status_flag, data_region_id, data_change_type, 
+      data_change_desc, last_update_by, last_update_date
+      )
+    values (#{projectDefectId,jdbcType=INTEGER}, #{defectFlowType,jdbcType=VARCHAR}, 
+      #{flowSenderId,jdbcType=INTEGER}, #{defectFlowTime,jdbcType=TIMESTAMP}, #{flowReceiverId,jdbcType=INTEGER}, 
+      #{defectFlowDesc,jdbcType=VARCHAR}, #{firstCreateBy,jdbcType=INTEGER}, #{firstCreateDate,jdbcType=TIMESTAMP}, 
+      #{dataStatusFlag,jdbcType=VARCHAR}, #{dataRegionId,jdbcType=INTEGER}, #{dataChangeType,jdbcType=VARCHAR}, 
+      #{dataChangeDesc,jdbcType=VARCHAR}, #{lastUpdateBy,jdbcType=INTEGER}, #{lastUpdateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="defect_flow_id" keyProperty="defectFlowId" parameterType="com.whcdit.imengya.model.ProjectDefectFlow" useGeneratedKeys="true">
+    insert into project_defect_flow
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="projectDefectId != null">
+        project_defect_id,
+      </if>
+      <if test="defectFlowType != null">
+        defect_flow_type,
+      </if>
+      <if test="flowSenderId != null">
+        flow_sender_id,
+      </if>
+      <if test="defectFlowTime != null">
+        defect_flow_time,
+      </if>
+      <if test="flowReceiverId != null">
+        flow_receiver_id,
+      </if>
+      <if test="defectFlowDesc != null">
+        defect_flow_desc,
+      </if>
+      <if test="firstCreateBy != null">
+        first_create_by,
+      </if>
+      <if test="firstCreateDate != null">
+        first_create_date,
+      </if>
+      <if test="dataStatusFlag != null">
+        data_status_flag,
+      </if>
+      <if test="dataRegionId != null">
+        data_region_id,
+      </if>
+      <if test="dataChangeType != null">
+        data_change_type,
+      </if>
+      <if test="dataChangeDesc != null">
+        data_change_desc,
+      </if>
+      <if test="lastUpdateBy != null">
+        last_update_by,
+      </if>
+      <if test="lastUpdateDate != null">
+        last_update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="projectDefectId != null">
+        #{projectDefectId,jdbcType=INTEGER},
+      </if>
+      <if test="defectFlowType != null">
+        #{defectFlowType,jdbcType=VARCHAR},
+      </if>
+      <if test="flowSenderId != null">
+        #{flowSenderId,jdbcType=INTEGER},
+      </if>
+      <if test="defectFlowTime != null">
+        #{defectFlowTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flowReceiverId != null">
+        #{flowReceiverId,jdbcType=INTEGER},
+      </if>
+      <if test="defectFlowDesc != null">
+        #{defectFlowDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="firstCreateBy != null">
+        #{firstCreateBy,jdbcType=INTEGER},
+      </if>
+      <if test="firstCreateDate != null">
+        #{firstCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatusFlag != null">
+        #{dataStatusFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="dataRegionId != null">
+        #{dataRegionId,jdbcType=INTEGER},
+      </if>
+      <if test="dataChangeType != null">
+        #{dataChangeType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataChangeDesc != null">
+        #{dataChangeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateBy != null">
+        #{lastUpdateBy,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateDate != null">
+        #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whcdit.imengya.model.ProjectDefectFlow">
+    update project_defect_flow
+    <set>
+      <if test="projectDefectId != null">
+        project_defect_id = #{projectDefectId,jdbcType=INTEGER},
+      </if>
+      <if test="defectFlowType != null">
+        defect_flow_type = #{defectFlowType,jdbcType=VARCHAR},
+      </if>
+      <if test="flowSenderId != null">
+        flow_sender_id = #{flowSenderId,jdbcType=INTEGER},
+      </if>
+      <if test="defectFlowTime != null">
+        defect_flow_time = #{defectFlowTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flowReceiverId != null">
+        flow_receiver_id = #{flowReceiverId,jdbcType=INTEGER},
+      </if>
+      <if test="defectFlowDesc != null">
+        defect_flow_desc = #{defectFlowDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="firstCreateBy != null">
+        first_create_by = #{firstCreateBy,jdbcType=INTEGER},
+      </if>
+      <if test="firstCreateDate != null">
+        first_create_date = #{firstCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatusFlag != null">
+        data_status_flag = #{dataStatusFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="dataRegionId != null">
+        data_region_id = #{dataRegionId,jdbcType=INTEGER},
+      </if>
+      <if test="dataChangeType != null">
+        data_change_type = #{dataChangeType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataChangeDesc != null">
+        data_change_desc = #{dataChangeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateBy != null">
+        last_update_by = #{lastUpdateBy,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateDate != null">
+        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where defect_flow_id = #{defectFlowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whcdit.imengya.model.ProjectDefectFlow">
+    update project_defect_flow
+    set project_defect_id = #{projectDefectId,jdbcType=INTEGER},
+      defect_flow_type = #{defectFlowType,jdbcType=VARCHAR},
+      flow_sender_id = #{flowSenderId,jdbcType=INTEGER},
+      defect_flow_time = #{defectFlowTime,jdbcType=TIMESTAMP},
+      flow_receiver_id = #{flowReceiverId,jdbcType=INTEGER},
+      defect_flow_desc = #{defectFlowDesc,jdbcType=VARCHAR},
+      first_create_by = #{firstCreateBy,jdbcType=INTEGER},
+      first_create_date = #{firstCreateDate,jdbcType=TIMESTAMP},
+      data_status_flag = #{dataStatusFlag,jdbcType=VARCHAR},
+      data_region_id = #{dataRegionId,jdbcType=INTEGER},
+      data_change_type = #{dataChangeType,jdbcType=VARCHAR},
+      data_change_desc = #{dataChangeDesc,jdbcType=VARCHAR},
+      last_update_by = #{lastUpdateBy,jdbcType=INTEGER},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP}
+    where defect_flow_id = #{defectFlowId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -2,6 +2,8 @@ package com.whcdit.imengya.server.impl;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import com.github.pagehelper.PageHelper;
 import com.whcdit.imengya.model.BaseModel;
 import com.whcdit.imengya.server.IBaseService;
@@ -9,11 +11,14 @@ import com.whcdit.imengya.utils.WhcditConstants;
 import com.whcdit.imengya.utils.WhcditTools;
 
 public class BaseService implements IBaseService {
-	
+
+	// ###数据区域ID
+	@Value("${mengya.data.region.id}")
+	private Integer dataRegionId;
+
 	@Override
 	public void settingValid(BaseModel param) {
 		param.setDataStatusFlag(WhcditConstants.VALID);
-
 	}
 
 	@Override
@@ -30,11 +35,11 @@ public class BaseService implements IBaseService {
 	@Override
 	public void settingWithInsert(BaseModel param, String desc) {
 		settingValid(param); // 自动有效
-		Integer uid=param.getUid();		
+		Integer uid = param.getUid();
 		Date d = new Date();
 		param.setFirstCreateBy(uid);
 		param.setFirstCreateDate(d);
-		String description = null;		
+		String description = null;
 		if (WhcditTools.strNullEmpty(desc)) {
 			String pd = param.getDataChangeDesc();
 			if (WhcditTools.strNullEmpty(pd)) {
@@ -59,8 +64,8 @@ public class BaseService implements IBaseService {
 	@Override
 	public void settingWithUpdate(BaseModel param, String desc) {
 		settingValid(param); // 自动有效
-		Integer uid=param.getUid();	
-		String description = null;		
+		Integer uid = param.getUid();
+		String description = null;
 		if (WhcditTools.strNullEmpty(desc)) {
 			String pd = param.getDataChangeDesc();
 			if (WhcditTools.strNullEmpty(pd)) {

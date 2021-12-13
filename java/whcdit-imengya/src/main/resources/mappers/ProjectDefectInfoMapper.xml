@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whcdit.imengya.mapper.ProjectDefectInfoMapper">
+  <resultMap id="BaseResultMap" type="com.whcdit.imengya.model.ProjectDefectInfo">
+    <id column="project_defect_id" jdbcType="INTEGER" property="projectDefectId" />
+    <result column="project_data_id" jdbcType="INTEGER" property="projectDataId" />
+    <result column="project_defect_sn" jdbcType="VARCHAR" property="projectDefectSn" />
+    <result column="project_defect_source" jdbcType="VARCHAR" property="projectDefectSource" />
+    <result column="project_defect_type" jdbcType="VARCHAR" property="projectDefectType" />
+    <result column="project_defect_os" jdbcType="VARCHAR" property="projectDefectOs" />
+    <result column="project_defect_browser" jdbcType="VARCHAR" property="projectDefectBrowser" />
+    <result column="project_defect_priority" jdbcType="VARCHAR" property="projectDefectPriority" />
+    <result column="defect_founder_id" jdbcType="INTEGER" property="defectFounderId" />
+    <result column="defect_founder_time" jdbcType="TIMESTAMP" property="defectFounderTime" />
+    <result column="project_defect_status" jdbcType="VARCHAR" property="projectDefectStatus" />
+    <result column="defect_handle_id" jdbcType="INTEGER" property="defectHandleId" />
+    <result column="defect_handle_time" jdbcType="TIMESTAMP" property="defectHandleTime" />
+    <result column="project_defect_remark" jdbcType="VARCHAR" property="projectDefectRemark" />
+    <result column="first_create_by" jdbcType="INTEGER" property="firstCreateBy" />
+    <result column="first_create_date" jdbcType="TIMESTAMP" property="firstCreateDate" />
+    <result column="data_status_flag" jdbcType="VARCHAR" property="dataStatusFlag" />
+    <result column="data_region_id" jdbcType="INTEGER" property="dataRegionId" />
+    <result column="data_change_type" jdbcType="VARCHAR" property="dataChangeType" />
+    <result column="data_change_desc" jdbcType="VARCHAR" property="dataChangeDesc" />
+    <result column="last_update_by" jdbcType="INTEGER" property="lastUpdateBy" />
+    <result column="last_update_date" jdbcType="TIMESTAMP" property="lastUpdateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    project_defect_id, project_data_id, project_defect_sn, project_defect_source, project_defect_type, 
+    project_defect_os, project_defect_browser, project_defect_priority, defect_founder_id, 
+    defect_founder_time, project_defect_status, defect_handle_id, defect_handle_time, 
+    project_defect_remark, first_create_by, first_create_date, data_status_flag, data_region_id, 
+    data_change_type, data_change_desc, last_update_by, last_update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from project_defect_info
+    where project_defect_id = #{projectDefectId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from project_defect_info
+    where project_defect_id = #{projectDefectId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="project_defect_id" keyProperty="projectDefectId" parameterType="com.whcdit.imengya.model.ProjectDefectInfo" useGeneratedKeys="true">
+    insert into project_defect_info (project_data_id, project_defect_sn, project_defect_source, 
+      project_defect_type, project_defect_os, project_defect_browser, 
+      project_defect_priority, defect_founder_id, 
+      defect_founder_time, project_defect_status, 
+      defect_handle_id, defect_handle_time, project_defect_remark, 
+      first_create_by, first_create_date, data_status_flag, 
+      data_region_id, data_change_type, data_change_desc, 
+      last_update_by, last_update_date)
+    values (#{projectDataId,jdbcType=INTEGER}, #{projectDefectSn,jdbcType=VARCHAR}, #{projectDefectSource,jdbcType=VARCHAR}, 
+      #{projectDefectType,jdbcType=VARCHAR}, #{projectDefectOs,jdbcType=VARCHAR}, #{projectDefectBrowser,jdbcType=VARCHAR}, 
+      #{projectDefectPriority,jdbcType=VARCHAR}, #{defectFounderId,jdbcType=INTEGER}, 
+      #{defectFounderTime,jdbcType=TIMESTAMP}, #{projectDefectStatus,jdbcType=VARCHAR}, 
+      #{defectHandleId,jdbcType=INTEGER}, #{defectHandleTime,jdbcType=TIMESTAMP}, #{projectDefectRemark,jdbcType=VARCHAR}, 
+      #{firstCreateBy,jdbcType=INTEGER}, #{firstCreateDate,jdbcType=TIMESTAMP}, #{dataStatusFlag,jdbcType=VARCHAR}, 
+      #{dataRegionId,jdbcType=INTEGER}, #{dataChangeType,jdbcType=VARCHAR}, #{dataChangeDesc,jdbcType=VARCHAR}, 
+      #{lastUpdateBy,jdbcType=INTEGER}, #{lastUpdateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="project_defect_id" keyProperty="projectDefectId" parameterType="com.whcdit.imengya.model.ProjectDefectInfo" useGeneratedKeys="true">
+    insert into project_defect_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="projectDataId != null">
+        project_data_id,
+      </if>
+      <if test="projectDefectSn != null">
+        project_defect_sn,
+      </if>
+      <if test="projectDefectSource != null">
+        project_defect_source,
+      </if>
+      <if test="projectDefectType != null">
+        project_defect_type,
+      </if>
+      <if test="projectDefectOs != null">
+        project_defect_os,
+      </if>
+      <if test="projectDefectBrowser != null">
+        project_defect_browser,
+      </if>
+      <if test="projectDefectPriority != null">
+        project_defect_priority,
+      </if>
+      <if test="defectFounderId != null">
+        defect_founder_id,
+      </if>
+      <if test="defectFounderTime != null">
+        defect_founder_time,
+      </if>
+      <if test="projectDefectStatus != null">
+        project_defect_status,
+      </if>
+      <if test="defectHandleId != null">
+        defect_handle_id,
+      </if>
+      <if test="defectHandleTime != null">
+        defect_handle_time,
+      </if>
+      <if test="projectDefectRemark != null">
+        project_defect_remark,
+      </if>
+      <if test="firstCreateBy != null">
+        first_create_by,
+      </if>
+      <if test="firstCreateDate != null">
+        first_create_date,
+      </if>
+      <if test="dataStatusFlag != null">
+        data_status_flag,
+      </if>
+      <if test="dataRegionId != null">
+        data_region_id,
+      </if>
+      <if test="dataChangeType != null">
+        data_change_type,
+      </if>
+      <if test="dataChangeDesc != null">
+        data_change_desc,
+      </if>
+      <if test="lastUpdateBy != null">
+        last_update_by,
+      </if>
+      <if test="lastUpdateDate != null">
+        last_update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="projectDataId != null">
+        #{projectDataId,jdbcType=INTEGER},
+      </if>
+      <if test="projectDefectSn != null">
+        #{projectDefectSn,jdbcType=VARCHAR},
+      </if>
+      <if test="projectDefectSource != null">
+        #{projectDefectSource,jdbcType=VARCHAR},
+      </if>
+      <if test="projectDefectType != null">
+        #{projectDefectType,jdbcType=VARCHAR},
+      </if>
+      <if test="projectDefectOs != null">
+        #{projectDefectOs,jdbcType=VARCHAR},
+      </if>
+      <if test="projectDefectBrowser != null">
+        #{projectDefectBrowser,jdbcType=VARCHAR},
+      </if>
+      <if test="projectDefectPriority != null">
+        #{projectDefectPriority,jdbcType=VARCHAR},
+      </if>
+      <if test="defectFounderId != null">
+        #{defectFounderId,jdbcType=INTEGER},
+      </if>
+      <if test="defectFounderTime != null">
+        #{defectFounderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projectDefectStatus != null">
+        #{projectDefectStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="defectHandleId != null">
+        #{defectHandleId,jdbcType=INTEGER},
+      </if>
+      <if test="defectHandleTime != null">
+        #{defectHandleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projectDefectRemark != null">
+        #{projectDefectRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="firstCreateBy != null">
+        #{firstCreateBy,jdbcType=INTEGER},
+      </if>
+      <if test="firstCreateDate != null">
+        #{firstCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatusFlag != null">
+        #{dataStatusFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="dataRegionId != null">
+        #{dataRegionId,jdbcType=INTEGER},
+      </if>
+      <if test="dataChangeType != null">
+        #{dataChangeType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataChangeDesc != null">
+        #{dataChangeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateBy != null">
+        #{lastUpdateBy,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateDate != null">
+        #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whcdit.imengya.model.ProjectDefectInfo">
+    update project_defect_info
+    <set>
+      <if test="projectDataId != null">
+        project_data_id = #{projectDataId,jdbcType=INTEGER},
+      </if>
+      <if test="projectDefectSn != null">
+        project_defect_sn = #{projectDefectSn,jdbcType=VARCHAR},
+      </if>
+      <if test="projectDefectSource != null">
+        project_defect_source = #{projectDefectSource,jdbcType=VARCHAR},
+      </if>
+      <if test="projectDefectType != null">
+        project_defect_type = #{projectDefectType,jdbcType=VARCHAR},
+      </if>
+      <if test="projectDefectOs != null">
+        project_defect_os = #{projectDefectOs,jdbcType=VARCHAR},
+      </if>
+      <if test="projectDefectBrowser != null">
+        project_defect_browser = #{projectDefectBrowser,jdbcType=VARCHAR},
+      </if>
+      <if test="projectDefectPriority != null">
+        project_defect_priority = #{projectDefectPriority,jdbcType=VARCHAR},
+      </if>
+      <if test="defectFounderId != null">
+        defect_founder_id = #{defectFounderId,jdbcType=INTEGER},
+      </if>
+      <if test="defectFounderTime != null">
+        defect_founder_time = #{defectFounderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projectDefectStatus != null">
+        project_defect_status = #{projectDefectStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="defectHandleId != null">
+        defect_handle_id = #{defectHandleId,jdbcType=INTEGER},
+      </if>
+      <if test="defectHandleTime != null">
+        defect_handle_time = #{defectHandleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projectDefectRemark != null">
+        project_defect_remark = #{projectDefectRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="firstCreateBy != null">
+        first_create_by = #{firstCreateBy,jdbcType=INTEGER},
+      </if>
+      <if test="firstCreateDate != null">
+        first_create_date = #{firstCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatusFlag != null">
+        data_status_flag = #{dataStatusFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="dataRegionId != null">
+        data_region_id = #{dataRegionId,jdbcType=INTEGER},
+      </if>
+      <if test="dataChangeType != null">
+        data_change_type = #{dataChangeType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataChangeDesc != null">
+        data_change_desc = #{dataChangeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateBy != null">
+        last_update_by = #{lastUpdateBy,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateDate != null">
+        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where project_defect_id = #{projectDefectId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whcdit.imengya.model.ProjectDefectInfo">
+    update project_defect_info
+    set project_data_id = #{projectDataId,jdbcType=INTEGER},
+      project_defect_sn = #{projectDefectSn,jdbcType=VARCHAR},
+      project_defect_source = #{projectDefectSource,jdbcType=VARCHAR},
+      project_defect_type = #{projectDefectType,jdbcType=VARCHAR},
+      project_defect_os = #{projectDefectOs,jdbcType=VARCHAR},
+      project_defect_browser = #{projectDefectBrowser,jdbcType=VARCHAR},
+      project_defect_priority = #{projectDefectPriority,jdbcType=VARCHAR},
+      defect_founder_id = #{defectFounderId,jdbcType=INTEGER},
+      defect_founder_time = #{defectFounderTime,jdbcType=TIMESTAMP},
+      project_defect_status = #{projectDefectStatus,jdbcType=VARCHAR},
+      defect_handle_id = #{defectHandleId,jdbcType=INTEGER},
+      defect_handle_time = #{defectHandleTime,jdbcType=TIMESTAMP},
+      project_defect_remark = #{projectDefectRemark,jdbcType=VARCHAR},
+      first_create_by = #{firstCreateBy,jdbcType=INTEGER},
+      first_create_date = #{firstCreateDate,jdbcType=TIMESTAMP},
+      data_status_flag = #{dataStatusFlag,jdbcType=VARCHAR},
+      data_region_id = #{dataRegionId,jdbcType=INTEGER},
+      data_change_type = #{dataChangeType,jdbcType=VARCHAR},
+      data_change_desc = #{dataChangeDesc,jdbcType=VARCHAR},
+      last_update_by = #{lastUpdateBy,jdbcType=INTEGER},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP}
+    where project_defect_id = #{projectDefectId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -19,9 +19,25 @@
     <sqlMapGenerator targetPackage="com.whcdit.imengya.mapper" targetProject="whcdit-imengya"/>
     <javaClientGenerator targetPackage="com.whcdit.imengya.mapper" targetProject="whcdit-imengya" type="XMLMAPPER"/>
 
-   	<table schema="resource" tableName="system_user_info" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+   	<table schema="mengya" tableName="project_data_info" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
 		<property name="useActualColumnNames" value="false" />
-		<generatedKey column="system_user_id" sqlStatement="JDBC" />
+		<generatedKey column="project_data_id" sqlStatement="JDBC" />
+	</table>
+   	<table schema="mengya" tableName="project_member_info" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+		<property name="useActualColumnNames" value="false" />
+		<generatedKey column="project_member_id" sqlStatement="JDBC" />
+	</table>
+   	<table schema="mengya" tableName="project_defect_info" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+		<property name="useActualColumnNames" value="false" />
+		<generatedKey column="project_defect_id" sqlStatement="JDBC" />
+	</table>
+   	<table schema="mengya" tableName="project_defect_content" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+		<property name="useActualColumnNames" value="false" />
+		<generatedKey column="defect_content_id" sqlStatement="JDBC" />
+	</table>
+   	<table schema="mengya" tableName="project_defect_flow" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+		<property name="useActualColumnNames" value="false" />
+		<generatedKey column="defect_flow_id" sqlStatement="JDBC" />
 	</table>
 	
 	 

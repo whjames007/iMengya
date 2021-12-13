@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whcdit.imengya.mapper.ProjectMemberInfoMapper">
+  <resultMap id="BaseResultMap" type="com.whcdit.imengya.model.ProjectMemberInfo">
+    <id column="project_member_id" jdbcType="INTEGER" property="projectMemberId" />
+    <result column="project_data_id" jdbcType="INTEGER" property="projectDataId" />
+    <result column="project_member_type" jdbcType="VARCHAR" property="projectMemberType" />
+    <result column="member_user_id" jdbcType="INTEGER" property="memberUserId" />
+    <result column="member_join_time" jdbcType="TIMESTAMP" property="memberJoinTime" />
+    <result column="project_member_desc" jdbcType="VARCHAR" property="projectMemberDesc" />
+    <result column="first_create_by" jdbcType="INTEGER" property="firstCreateBy" />
+    <result column="first_create_date" jdbcType="TIMESTAMP" property="firstCreateDate" />
+    <result column="data_status_flag" jdbcType="VARCHAR" property="dataStatusFlag" />
+    <result column="data_region_id" jdbcType="INTEGER" property="dataRegionId" />
+    <result column="data_change_type" jdbcType="VARCHAR" property="dataChangeType" />
+    <result column="data_change_desc" jdbcType="VARCHAR" property="dataChangeDesc" />
+    <result column="last_update_by" jdbcType="INTEGER" property="lastUpdateBy" />
+    <result column="last_update_date" jdbcType="TIMESTAMP" property="lastUpdateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    project_member_id, project_data_id, project_member_type, member_user_id, member_join_time, 
+    project_member_desc, first_create_by, first_create_date, data_status_flag, data_region_id, 
+    data_change_type, data_change_desc, last_update_by, last_update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from project_member_info
+    where project_member_id = #{projectMemberId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from project_member_info
+    where project_member_id = #{projectMemberId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="project_member_id" keyProperty="projectMemberId" parameterType="com.whcdit.imengya.model.ProjectMemberInfo" useGeneratedKeys="true">
+    insert into project_member_info (project_data_id, project_member_type, 
+      member_user_id, member_join_time, project_member_desc, 
+      first_create_by, first_create_date, data_status_flag, 
+      data_region_id, data_change_type, data_change_desc, 
+      last_update_by, last_update_date)
+    values (#{projectDataId,jdbcType=INTEGER}, #{projectMemberType,jdbcType=VARCHAR}, 
+      #{memberUserId,jdbcType=INTEGER}, #{memberJoinTime,jdbcType=TIMESTAMP}, #{projectMemberDesc,jdbcType=VARCHAR}, 
+      #{firstCreateBy,jdbcType=INTEGER}, #{firstCreateDate,jdbcType=TIMESTAMP}, #{dataStatusFlag,jdbcType=VARCHAR}, 
+      #{dataRegionId,jdbcType=INTEGER}, #{dataChangeType,jdbcType=VARCHAR}, #{dataChangeDesc,jdbcType=VARCHAR}, 
+      #{lastUpdateBy,jdbcType=INTEGER}, #{lastUpdateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="project_member_id" keyProperty="projectMemberId" parameterType="com.whcdit.imengya.model.ProjectMemberInfo" useGeneratedKeys="true">
+    insert into project_member_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="projectDataId != null">
+        project_data_id,
+      </if>
+      <if test="projectMemberType != null">
+        project_member_type,
+      </if>
+      <if test="memberUserId != null">
+        member_user_id,
+      </if>
+      <if test="memberJoinTime != null">
+        member_join_time,
+      </if>
+      <if test="projectMemberDesc != null">
+        project_member_desc,
+      </if>
+      <if test="firstCreateBy != null">
+        first_create_by,
+      </if>
+      <if test="firstCreateDate != null">
+        first_create_date,
+      </if>
+      <if test="dataStatusFlag != null">
+        data_status_flag,
+      </if>
+      <if test="dataRegionId != null">
+        data_region_id,
+      </if>
+      <if test="dataChangeType != null">
+        data_change_type,
+      </if>
+      <if test="dataChangeDesc != null">
+        data_change_desc,
+      </if>
+      <if test="lastUpdateBy != null">
+        last_update_by,
+      </if>
+      <if test="lastUpdateDate != null">
+        last_update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="projectDataId != null">
+        #{projectDataId,jdbcType=INTEGER},
+      </if>
+      <if test="projectMemberType != null">
+        #{projectMemberType,jdbcType=VARCHAR},
+      </if>
+      <if test="memberUserId != null">
+        #{memberUserId,jdbcType=INTEGER},
+      </if>
+      <if test="memberJoinTime != null">
+        #{memberJoinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projectMemberDesc != null">
+        #{projectMemberDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="firstCreateBy != null">
+        #{firstCreateBy,jdbcType=INTEGER},
+      </if>
+      <if test="firstCreateDate != null">
+        #{firstCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatusFlag != null">
+        #{dataStatusFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="dataRegionId != null">
+        #{dataRegionId,jdbcType=INTEGER},
+      </if>
+      <if test="dataChangeType != null">
+        #{dataChangeType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataChangeDesc != null">
+        #{dataChangeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateBy != null">
+        #{lastUpdateBy,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateDate != null">
+        #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whcdit.imengya.model.ProjectMemberInfo">
+    update project_member_info
+    <set>
+      <if test="projectDataId != null">
+        project_data_id = #{projectDataId,jdbcType=INTEGER},
+      </if>
+      <if test="projectMemberType != null">
+        project_member_type = #{projectMemberType,jdbcType=VARCHAR},
+      </if>
+      <if test="memberUserId != null">
+        member_user_id = #{memberUserId,jdbcType=INTEGER},
+      </if>
+      <if test="memberJoinTime != null">
+        member_join_time = #{memberJoinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projectMemberDesc != null">
+        project_member_desc = #{projectMemberDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="firstCreateBy != null">
+        first_create_by = #{firstCreateBy,jdbcType=INTEGER},
+      </if>
+      <if test="firstCreateDate != null">
+        first_create_date = #{firstCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatusFlag != null">
+        data_status_flag = #{dataStatusFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="dataRegionId != null">
+        data_region_id = #{dataRegionId,jdbcType=INTEGER},
+      </if>
+      <if test="dataChangeType != null">
+        data_change_type = #{dataChangeType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataChangeDesc != null">
+        data_change_desc = #{dataChangeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateBy != null">
+        last_update_by = #{lastUpdateBy,jdbcType=INTEGER},
+      </if>
+      <if test="lastUpdateDate != null">
+        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where project_member_id = #{projectMemberId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whcdit.imengya.model.ProjectMemberInfo">
+    update project_member_info
+    set project_data_id = #{projectDataId,jdbcType=INTEGER},
+      project_member_type = #{projectMemberType,jdbcType=VARCHAR},
+      member_user_id = #{memberUserId,jdbcType=INTEGER},
+      member_join_time = #{memberJoinTime,jdbcType=TIMESTAMP},
+      project_member_desc = #{projectMemberDesc,jdbcType=VARCHAR},
+      first_create_by = #{firstCreateBy,jdbcType=INTEGER},
+      first_create_date = #{firstCreateDate,jdbcType=TIMESTAMP},
+      data_status_flag = #{dataStatusFlag,jdbcType=VARCHAR},
+      data_region_id = #{dataRegionId,jdbcType=INTEGER},
+      data_change_type = #{dataChangeType,jdbcType=VARCHAR},
+      data_change_desc = #{dataChangeDesc,jdbcType=VARCHAR},
+      last_update_by = #{lastUpdateBy,jdbcType=INTEGER},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP}
+    where project_member_id = #{projectMemberId,jdbcType=INTEGER}
+  </update>
+</mapper>

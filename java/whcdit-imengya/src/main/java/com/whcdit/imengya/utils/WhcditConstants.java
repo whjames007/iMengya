@@ -1,7 +1,7 @@
 package com.whcdit.imengya.utils;
 
 public class WhcditConstants {
-
+	
 	public static final String CHARSET = "UTF-8";
 
 	public static final String SNULL = "SNULL";
@@ -69,9 +69,26 @@ public class WhcditConstants {
 	 */
 	public static final String PFLS004 = "PFLS004";
 	/**
-	 * 【项目流程标识PFLS005=计划评审驳回】【宋鹏-18091】【武汉】【2019-08-23】
+	 * 【项目流程标识PFLS005=资源计划评审驳回】【宋鹏-18091】【武汉】【2019-08-23】
 	 */
 	public static final String PFLS005 = "PFLS005";
+	/**
+	 * 【项目流程标识PFLS006=设备计划评审驳回】【宋鹏-18091】【武汉】【2019-09-27】
+	 */
+	public static final String PFLS006 = "PFLS006";
+	/**
+	 * 【项目流程标识PFLS101=设备申领建立】【宋鹏-18091】【武汉】【2019-09-27】
+	 */
+	public static final String PFLS101 = "PFLS101";
+	/**
+	 * 【项目流程标识PFLS102=设备申领通过】【宋鹏-18091】【武汉】【2019-09-27】
+	 */
+	public static final String PFLS102 = "PFLS102";
+	/**
+	 * 【项目流程标识PFLS103=设备申领驳回】【宋鹏-18091】【武汉】【2019-09-27】
+	 */
+	public static final String PFLS103 = "PFLS103";
+	
 	
 	/**
 	 * WHCDIT_RESPONSE_10000=一切正常
